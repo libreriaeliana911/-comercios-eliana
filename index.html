@@ -1,186 +1,119 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comercios Eliana</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f6f9; color: #333; text-align: center; }
+        header { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 40px 20px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: 1px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 15px; padding: 30px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-5px); }
+        .card h2 { font-size: 1.6rem; margin-bottom: 15px; }
+        .verduleria h2 { color: #27ae60; }
+        .carniceria h2 { color: #c0392b; }
+        .libreria h2 { color: #2980b9; }
+        .card p { color: #666; font-size: 1rem; line-height: 1.5; margin-bottom: 25px; }
+        .btn { display: inline-block; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; color: white; transition: background 0.2s; }
+        .verduleria .btn { background-color: #27ae60; }
+        .verduleria .btn:hover { background-color: #219653; }
+        .carniceria .btn { background-color: #c0392b; }
+        .carniceria .btn:hover { background-color: #a02d22; }
+        .libreria .btn { background-color: #2980b9; }
+        .libreria .btn:hover { background-color: #206694; }
+        
+        /* Nueva sección de Sucursales */
+        .sucursales-section { max-width: 1000px; margin: 50px auto; padding: 30px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
+        .sucursales-section h2 { text-align: center; margin-bottom: 10px; color: #2c3e50; font-size: 1.8rem; }
+        .sucursales-section .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-weight: bold; }
+        .sucursal-item { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px dashed #e2e8f0; }
+        .sucursal-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .sucursal-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .sucursal-info { color: #555; font-size: 0.95rem; line-height: 1.6; margin-left: 28px; }
+        .map-link { display: inline-block; color: #3498db; text-decoration: none; font-weight: bold; margin-top: 5px; }
+        .map-link:hover { text-decoration: underline; }
 
-        body {
-            background-color: #f5f6fa;
-            color: #2f3640;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
-            color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .contenedor-locales {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 35px;
-            padding: 60px 20px;
-            flex: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .tarjeta-local {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            padding: 30px 25px;
-            width: 320px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .tarjeta-local:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .imagen-placeholder {
-            font-size: 45px;
-            background-color: rgba(0, 0, 0, 0.04);
-            padding: 15px;
-            border-radius: 50%;
-            width: 85px;
-            height: 85px;
-            margin: 0 auto 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tarjeta-local h2 {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .tarjeta-local p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .boton-entrar {
-            display: inline-block;
-            color: white;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: background 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .boton-entrar:active {
-            transform: scale(0.98);
-        }
-
-        /* --- Estilos por cada local --- */
-
-        /* 1. Verdulería (Fondo blanco, detalles en verde) */
-        .tarjeta-verduleria h2 { color: #2ecc71; }
-        .tarjeta-verduleria p { color: #57606f; }
-        .tarjeta-verduleria .boton-entrar { background-color: #2ecc71; }
-        .tarjeta-verduleria .boton-entrar:hover { background-color: #27ae60; }
-
-        /* 2. Carnicería (Fondo Rojo, texto Blanco) */
-        .tarjeta-carniceria { background-color: #b92f2f; }
-        .tarjeta-carniceria h2 { color: #ffffff; }
-        .tarjeta-carniceria p { color: #ffffff !important; opacity: 1 !important; }
-        .tarjeta-carniceria .imagen-placeholder { background-color: rgba(255, 255, 255, 0.2); }
-        .tarjeta-carniceria .boton-entrar { background-color: #ffffff; color: #b92f2f; }
-        .tarjeta-carniceria .boton-entrar:hover { background-color: #f8f9fa; }
-
-        /* 3. Librería (Fondo Azul, texto Blanco) */
-        .tarjeta-libreria { background-color: #2980b9; }
-        .tarjeta-libreria h2 { color: #ffffff; }
-        .tarjeta-libreria p { color: #ffffff !important; opacity: 1 !important; }
-        .tarjeta-libreria .imagen-placeholder { background-color: rgba(255, 255, 255, 0.2); }
-        .tarjeta-libreria .boton-entrar { background-color: #ffffff; color: #2980b9; }
-        .tarjeta-libreria .boton-entrar:hover { background-color: #f8f9fa; }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background-color: #2c3e50;
-            color: #a4b0be;
-            font-size: 0.9rem;
-            border-top: 1px solid #34495e;
-        }
+        footer { margin-top: 60px; background-color: #2c3e50; color: white; padding: 20px; font-size: 0.9rem; }
+        footer a { color: #f1c40f; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Comercios Eliana</h1>
-        <p>Elegí la sucursal que querés visitar hoy</p>
+        <p>Elegí el comercio que buscás y hacé tu pedido directo por WhatsApp</p>
     </header>
 
-    <main class="contenedor-locales">
-                <!-- Tarjeta Verdulería -->
-        <section class="tarjeta-local tarjeta-verduleria">
-            <div class="imagen-placeholder">🥑</div>
-            <h2>Verdulería Eliana</h2>
-            <p>Frutas y verduras frescas, combos semanales y la mejor calidad para tu mesa todos los días.</p>
-            <a href="verduleria.html" class="boton-entrar">Ver Catálogo</a>
-        </section>
+    <div class="container">
+        <!-- SECCIÓN VERDULERÍA -->
+        <div class="card verduleria">
+            <div>
+                <h2>Verdulería Eliana</h2>
+                <p>Frutas y verduras frescas, combos semanales y la mejor calidad para tu mesa todos los días.</p>
+            </div>
+            <a href="verduleria.html" class="btn">Ver Catálogo / Pedir</a>
+        </div>
 
+        <!-- SECCIÓN CARNICERÍA -->
+        <div class="card carniceria">
+            <div>
+                <h2>Carnicería Eliana</h2>
+                <p>Los mejores cortes de carne, asado, milanesas preparadas y ofertas especiales para tu hogar.</p>
+            </div>
+            <a href="https://github.io" class="btn">Ver Catálogo / Pedir</a>
+        </div>
 
-        <!-- Tarjeta Carnicería -->
-        <section class="tarjeta-local tarjeta-carniceria">
-            <div class="imagen-placeholder">🥩</div>
-            <h2>Carnicería Eliana</h2>
-            <p>Los mejores cortes de carne, asado, milanesas preparadas y ofertas especiales para tu hogar.</p>
-            <a href="carniceria.html" class="boton-entrar">Ver Catálogo</a>
-        </section>
+        <!-- SECCIÓN LIBRERÍA JUGUETERÍA -->
+        <div class="card libreria">
+            <div>
+                <h2>Librería Juguetería Eliana</h2>
+                <p>Artículos escolares, resmas, regalería, juegos de mesa y los mejores juguetes para todas las edades.</p>
+            </div>
+            <a href="https://github.io" class="btn">Ver Catálogo / Pedir</a>
+        </div>
+    </div>
 
-        <!-- Tarjeta Librería -->
-        <section class="tarjeta-local tarjeta-libreria">
-            <div class="imagen-placeholder">📚</div>
-            <h2>Librería Eliana</h2>
-            <p>Artículos escolares, resmas, regalería, juegos de mesa y los mejores juguetes para todas las edades.</p>
-            <a href="libreria.html" class="boton-entrar">Ver Catálogo</a>
-        </section>
-    </main>
+    <!-- NUEVA SECCIÓN: NUESTROS LOCALES -->
+    <div class="sucursales-section">
+        <h2>Nuestros Locales</h2>
+        <p class="subtitle">🗓️ Abiertos de Lunes a Domingo</p>
+
+        <div class="sucursal-item">
+            <div class="sucursal-title">📚 Librería y Juguetería</div>
+            <div class="sucursal-info">
+                📍 <strong>Dirección:</strong> Calle 5 N° 1366, Pedro Luro<br>
+                🕐 <strong>Horario:</strong> de 7:00 a 21:00 hs<br>
+                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
+            </div>
+        </div>
+
+        <div class="sucursal-item">
+            <div class="sucursal-title">🥩 Carnicería</div>
+            <div class="sucursal-info">
+                📍 <strong>Dirección:</strong> Calle 101 N° 1077, Pedro Luro<br>
+                🕐 <strong>Horario:</strong> de 8:00 a 13:00 hs y de 17:00 a 22:00 hs<br>
+                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
+            </div>
+        </div>
+
+        <div class="sucursal-item">
+            <div class="sucursal-title">🥑 Verdulería</div>
+            <div class="sucursal-info">
+                📍 <strong>Dirección:</strong> Calle 101 N° 1117, Pedro Luro<br>
+                🕐 <strong>Horario:</strong> de 4:00 a 21:00 hs<br>
+                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
+            </div>
+        </div>
+    </div>
 
     <footer>
-        <p>© 2026 Comercios Eliana. Todos los derechos reservados.</p>
+        <p>Contacto Central: <a href="https://wa.me">291 470-7417</a> | © 2026 Comercios Eliana</p>
     </footer>
 
 </body>
 </html>
+
