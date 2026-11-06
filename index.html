@@ -3,41 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comercios Eliana</title>
-    <!-- Estilos CSS y estructura general disponibles en la documentación completa -->
+    <title>Carnicería Eliana - Catálogo</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f4f6f9; color: #333; text-align: center; }
+        header { background-color: #c0392b; color: white; padding: 30px 20px; }
+        .back-btn { display: inline-block; margin: 20px 0; color: #c0392b; text-decoration: none; font-weight: bold; }
+        .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        .search-bar { width: 100%; padding: 12px 20px; border: 2px solid #c0392b; border-radius: 25px; font-size: 1rem; outline: none; }
+        .grid { max-width: 900px; margin: 10px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .item { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
+        .price { color: #c0392b; font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
+        .btn-wsp { display: inline-block; background-color: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
+        .btn-wsp:hover { background-color: #20ba5a; }
+        .no-results { display: none; margin: 40px auto; color: #666; font-size: 1.1rem; }
+    </style>
 </head>
 <body>
-    <!-- SECCIÓN: NUESTROS LOCALES CON ENLACES PRECISOS DE GOOGLE MAPS -->
-    <div class="sucursales-section">
-        <h2>Nuestros Locales</h2>
-        <p class="subtitle">🗓️ Abiertos de Lunes a Domingo</p>
 
-        <div class="sucursal-item">
-            <div class="sucursal-title">📚 Librería y Juguetería</div>
-            <div class="sucursal-info">
-                📍 <strong>Dirección:</strong> Calle 5 N° 1366, Pedro Luro<br>
-                🕐 <strong>Horario:</strong> de 7:00 a 21:00 hs<br>
-                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
-            </div>
+    <header>
+        <h1>Carnicería Eliana</h1>
+        <p>Los mejores cortes y ofertas especiales para tu mesa</p>
+    </header>
+
+    <a href="index.html" class="back-btn">⬅ Volver al Inicio</a>
+
+    <div class="search-container">
+        <input type="text" id="search-input" class="search-bar" placeholder="🔍 Buscar corte (ej: asado, milanesas)..." onkeyup="filtrarProductos()">
+    </div>
+
+    <p id="no-results-msg" class="no-results">No se encontraron productos con ese nombre.</p>
+
+    <div class="grid" id="products-grid">
+        <div class="item">
+            <h3 class="product-name">Milanesas Preparadas</h3>
+            <p>kl</p>
+            <p class="price">$5500</p>
+            <a href="#" onclick="consultarProducto('Milanesas Preparadas', '5500', 'kl')" class="btn-wsp">Consultar</a>
         </div>
-
-        <div class="sucursal-item">
-            <div class="sucursal-title">🥩 Carnicería</div>
-            <div class="sucursal-info">
-                📍 <strong>Dirección:</strong> Calle 101 N° 1077, Pedro Luro<br>
-                🕐 <strong>Horario:</strong> de 8:00 a 13:00 hs y de 17:00 a 22:00 hs<br>
-                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
-            </div>
-        </div>
-
-        <div class="sucursal-item">
-            <div class="sucursal-title">🥑 Verdulería</div>
-            <div class="sucursal-info">
-                📍 <strong>Dirección:</strong> Calle 101 N° 1117, Pedro Luro<br>
-                🕐 <strong>Horario:</strong> de 4:00 a 23:00 hs<br>
-                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
-            </div>
+        <div class="item">
+            <h3 class="product-name">Asado</h3>
+            <p>kl</p>
+            <p class="price">$7000</p>
+            <a href="#" onclick="consultarProducto('Asado', '7000', 'kl')" class="btn-wsp">Consultar</a>
         </div>
     </div>
+
+    <script>
+        function filtrarProductos() {
+            let input = document.getElementById('search-input').value.toLowerCase();
+            let items = document.getElementsByClassName('item');
+            let noResults = document.getElementById('no-results-msg');
+            let encontrados = 0;
+
+            for (let i = 0; i < items.length; i++) {
+                let name = items[i].getElementsByClassName('product-name')[0].innerHTML.toLowerCase();
+                if (name.includes(input)) {
+                    items[i].style.display = "flex";
+                    encontrados++;
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+            if (encontrados === 0) { noResults.style.display = "block"; } 
+            else { noResults.style.display = "none"; }
+        }
+
+        // CORREGIDO: Mensaje configurado para enviar la consulta exacta a la Carnicería
+        function consultarProducto(nombre, precio, unidad) {
+            let numeroTelefono = "542914707417";
+            let mensaje = "Hola! Vi en la web que tienen " + nombre + " (" + unidad + " $" + precio + "). ¿Tienen stock disponible para pasar a buscar por el local de la Carnicería?";
+            let enlaceWhatsApp = "https://whatsapp.com" + numeroTelefono + "&text=" + encodeURIComponent(mensaje);
+            window.open(enlaceWhatsApp, '_blank');
+        }
+    </script>
+
 </body>
 </html>
