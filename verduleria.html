@@ -9,31 +9,79 @@
         body { background-color: #f4f6f9; color: #333; text-align: center; }
         header { background-color: #27ae60; color: white; padding: 30px 20px; }
         .back-btn { display: inline-block; margin: 20px 0; color: #27ae60; text-decoration: none; font-weight: bold; }
-        .grid { max-width: 900px; margin: 20px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .item { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        .search-bar { width: 100%; padding: 12px 20px; border: 2px solid #27ae60; border-radius: 25px; font-size: 1rem; outline: none; }
+        .grid { max-width: 900px; margin: 10px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .item { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
         .price { color: #27ae60; font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
-        .btn-wsp { display: inline-block; background-color: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; }
+        .btn-wsp { display: inline-block; background-color: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
+        .btn-wsp:hover { background-color: #20ba5a; }
+        .no-results { display: none; margin: 40px auto; color: #666; font-size: 1.1rem; }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Verdulería Eliana</h1>
         <p>Frutas y verduras frescas todos los días</p>
     </header>
+
     <a href="index.html" class="back-btn">⬅ Volver al Inicio</a>
-    <div class="grid">
+
+    <div class="search-container">
+        <input type="text" id="search-input" class="search-bar" placeholder="🔍 Buscar producto (ej: naranja, papa)..." onkeyup="filtrarProductos()">
+    </div>
+
+    <p id="no-results-msg" class="no-results">No se encontraron productos con ese nombre.</p>
+
+    <div class="grid" id="products-grid">
         <div class="item">
-            <h3>Combo Familiar Semanal</h3>
-            <p>Papas, cebollas, zanahorias, calabaza y tomates seleccionados.</p>
-            <p class="price">Consultar Precio</p>
-            <a href="https://wa.me" target="_blank" class="btn-wsp">Pedir por WhatsApp</a>
+            <h3 class="product-name">Naranja</h3>
+            <p>kl</p>
+            <p class="price">$2000</p>
+            <a href="#" onclick="consultarProducto('Naranja', '2000', 'kl')" class="btn-wsp">Consultar</a>
         </div>
         <div class="item">
-            <h3>Bolsón de Frutas</h3>
-            <p>Bananas, manzanas, naranjas y mandarinas de estación.</p>
-            <p class="price">Consultar Precio</p>
-            <a href="https://wa.me" target="_blank" class="btn-wsp">Pedir por WhatsApp</a>
+            <h3 class="product-name">Papa Negra</h3>
+            <p>kl</p>
+            <p class="price">$1200</p>
+            <a href="#" onclick="consultarProducto('Papa Negra', '1200', 'kl')" class="btn-wsp">Consultar</a>
+        </div>
+        <div class="item">
+            <h3 class="product-name">Banana</h3>
+            <p>kl</p>
+            <p class="price">$2500</p>
+            <a href="#" onclick="consultarProducto('Banana', '2500', 'kl')" class="btn-wsp">Consultar</a>
         </div>
     </div>
+
+    <script>
+        function filtrarProductos() {
+            let input = document.getElementById('search-input').value.toLowerCase();
+            let items = document.getElementsByClassName('item');
+            let noResults = document.getElementById('no-results-msg');
+            let encontrados = 0;
+
+            for (let i = 0; i < items.length; i++) {
+                let name = items[i].getElementsByClassName('product-name')[0].innerHTML.toLowerCase();
+                if (name.includes(input)) {
+                    items[i].style.display = "flex";
+                    encontrados++;
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+            if (encontrados === 0) { noResults.style.display = "block"; } 
+            else { noResults.style.display = "none"; }
+        }
+
+        function consultarProducto(nombre, precio, unidad) {
+            let numeroTelefono = "542914707417";
+            let mensaje = "Hola! Vi en la web que tienen " + nombre + " (" + unidad + " $" + precio + "). ¿Tienen stock disponible para pasar a buscar por el local de la Verdulería?";
+            let enlaceWhatsApp = "https://whatsapp.com" + numeroTelefono + "&text=" + encodeURIComponent(mensaje);
+            window.open(enlaceWhatsApp, '_blank');
+        }
+    </script>
+
 </body>
 </html>
