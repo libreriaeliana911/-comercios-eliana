@@ -1,83 +1,13 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comercios Eliana</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f6f9; color: #333; text-align: center; }
-        header { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 40px 20px; }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: 1px; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
-        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 15px; padding: 30px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-5px); }
-        .card h2 { font-size: 1.6rem; margin-bottom: 15px; }
-        .verduleria h2 { color: #27ae60; }
-        .carniceria h2 { color: #c0392b; }
-        .libreria h2 { color: #2980b9; }
-        .card p { color: #666; font-size: 1rem; line-height: 1.5; margin-bottom: 25px; }
-        .btn { display: inline-block; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; color: white; transition: background 0.2s; }
-        .verduleria .btn { background-color: #27ae60; }
-        .verduleria .btn:hover { background-color: #219653; }
-        .carniceria .btn { background-color: #c0392b; }
-        .carniceria .btn:hover { background-color: #a02d22; }
-        .libreria .btn { background-color: #2980b9; }
-        .libreria .btn:hover { background-color: #206694; }
-        
-        /* Nueva sección de Sucursales */
-        .sucursales-section { max-width: 1000px; margin: 50px auto; padding: 30px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
-        .sucursales-section h2 { text-align: center; margin-bottom: 10px; color: #2c3e50; font-size: 1.8rem; }
-        .sucursales-section .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-weight: bold; }
-        .sucursal-item { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px dashed #e2e8f0; }
-        .sucursal-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .sucursal-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .sucursal-info { color: #555; font-size: 0.95rem; line-height: 1.6; margin-left: 28px; }
-        .map-link { display: inline-block; color: #3498db; text-decoration: none; font-weight: bold; margin-top: 5px; }
-        .map-link:hover { text-decoration: underline; }
-
-        footer { margin-top: 60px; background-color: #2c3e50; color: white; padding: 20px; font-size: 0.9rem; }
-        footer a { color: #f1c40f; text-decoration: none; font-weight: bold; }
-    </style>
+    <!-- Estilos CSS y estructura general disponibles en la documentación completa -->
 </head>
 <body>
-
-    <header>
-        <h1>Comercios Eliana</h1>
-        <p>Elegí el comercio que buscás y consultanos</p>
-    </header>
-
-    <div class="container">
-        <!-- SECCIÓN VERDULERÍA -->
-        <div class="card verduleria">
-            <div>
-                <h2>Verdulería Eliana</h2>
-                <p>Frutas y verduras frescas, combos semanales y la mejor calidad para tu mesa todos los días.</p>
-            </div>
-            <a href="verduleria.html" class="btn">Ver Catálogo / Pedir</a>
-        </div>
-
-        <!-- SECCIÓN CARNICERÍA -->
-        <div class="card carniceria">
-            <div>
-                <h2>Carnicería Eliana</h2>
-                <p>Los mejores cortes de carne, asado, milanesas preparadas y ofertas especiales para tu hogar.</p>
-            </div>
-            <a href="carniceria.html" class="btn">Ver Catálogo / Pedir</a>
-        </div>
-
-        <!-- SECCIÓN LIBRERÍA JUGUETERÍA -->
-        <div class="card libreria">
-            <div>
-                <h2>Librería Juguetería Eliana</h2>
-                <p>Artículos escolares, resmas, regalería, juegos de mesa y los mejores juguetes para todas las edades.</p>
-            </div>
-            <a href="libreria.html" class="btn">Ver Catálogo / Pedir</a>
-        </div>
-    </div>
-
-    <!-- NUEVA SECCIÓN: NUESTROS LOCALES -->
+    <!-- SECCIÓN: NUESTROS LOCALES CON ENLACES PRECISOS DE GOOGLE MAPS -->
     <div class="sucursales-section">
         <h2>Nuestros Locales</h2>
         <p class="subtitle">🗓️ Abiertos de Lunes a Domingo</p>
@@ -109,11 +39,5 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>Contacto Central: <a href="https://wa.me">291 470-7417</a> | © 2026 Comercios Eliana</p>
-    </footer>
-
 </body>
 </html>
-
