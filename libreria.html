@@ -72,12 +72,12 @@
         }
 
         function consultarProducto(nombre, precio, unidad) {
-            let numeroTelefono = "542914707417";
-            let mensaje = "Hola! Vi en la web que tienen " + nombre + " (" + unidad + " $" + precio + "). ¿Tienen stock disponible para pasar a buscar por el local de la Librería y Juguetería?";
-            let enlaceWhatsApp = "https://wa.me" + numeroTelefono + "?text=" + encodeURIComponent(mensaje);
-            window.open(enlaceWhatsApp, '_blank');
-        }
-    </script>
+    // CAMBIO CLAVE: Usamos el enlace completo oficial para ganarle al traductor
+    let numeroTelefono = "542914707417";
+    let mensaje = "Hola! Vi en la web que tienen " + nombre + " (" + unidad + " $" + precio + "). ¿Tienen stock disponible para pasar a buscar por el local?";
+    
+    // Aquí cambiamos 'wa.me' por '://whatsapp.com' que es inmune a las traducciones
+    let enlaceWhatsApp = "https://://whatsapp.com?phone=" + numeroTelefono + "&text=" + encodeURIComponent(mensaje);
+    window.open(enlaceWhatsApp, '_blank');
+}
 
-</body>
-</html>
