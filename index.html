@@ -3,80 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carnicería Eliana - Catálogo</title>
+    <title>Comercios Eliana</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f6f9; color: #333; text-align: center; }
-        header { background-color: #c0392b; color: white; padding: 30px 20px; }
-        .back-btn { display: inline-block; margin: 20px 0; color: #c0392b; text-decoration: none; font-weight: bold; }
-        .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
-        .search-bar { width: 100%; padding: 12px 20px; border: 2px solid #c0392b; border-radius: 25px; font-size: 1rem; outline: none; }
-        .grid { max-width: 900px; margin: 10px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .item { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
-        .price { color: #c0392b; font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
-        .btn-wsp { display: inline-block; background-color: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
-        .btn-wsp:hover { background-color: #20ba5a; }
-        .no-results { display: none; margin: 40px auto; color: #666; font-size: 1.1rem; }
+        header { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 40px 20px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: 1px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 15px; padding: 30px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform: translateY(-5px); }
+        .card h2 { font-size: 1.6rem; margin-bottom: 15px; }
+        .verduleria h2 { color: #27ae60; }
+        .carniceria h2 { color: #c0392b; }
+        .libreria h2 { color: #2980b9; }
+        .card p { color: #666; font-size: 1rem; line-height: 1.5; margin-bottom: 25px; }
+        .btn { display: inline-block; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; color: white; transition: background 0.2s; }
+        .verduleria .btn { background-color: #27ae60; }
+        .verduleria .btn:hover { background-color: #219653; }
+        .carniceria .btn { background-color: #c0392b; }
+        .carniceria .btn:hover { background-color: #a02d22; }
+        .libreria .btn { background-color: #2980b9; }
+        .libreria .btn:hover { background-color: #206694; }
+        
+        .sucursales-section { max-width: 1000px; margin: 50px auto; padding: 30px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
+        .sucursales-section h2 { text-align: center; margin-bottom: 10px; color: #2c3e50; font-size: 1.8rem; }
+        .sucursales-section .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-weight: bold; }
+        .sucursal-item { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px dashed #e2e8f0; }
+        .sucursal-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .sucursal-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .sucursal-info { color: #555; font-size: 0.95rem; line-height: 1.6; margin-left: 28px; }
+        .map-link { display: inline-block; color: #3498db; text-decoration: none; font-weight: bold; margin-top: 5px; }
+        .map-link:hover { text-decoration: underline; }
+
+        footer { margin-top: 60px; background-color: #2c3e50; color: white; padding: 20px; font-size: 0.9rem; }
+        footer a { color: #f1c40f; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Carnicería Eliana</h1>
-        <p>Los mejores cortes y ofertas especiales para tu mesa</p>
+        <h1>Comercios Eliana</h1>
+        <p>Consultá el stock de nuestros locales para pasar a retirar</p>
     </header>
 
-    <a href="index.html" class="back-btn">⬅ Volver al Inicio</a>
+    <div class="container">
+        <!-- SECCIÓN VERDULERÍA -->
+        <div class="card verduleria">
+            <div>
+                <h2>Verdulería Eliana</h2>
+                <p>Frutas y verduras frescas, combos semanales y la mejor calidad para tu mesa todos los días.</p>
+            </div>
+            <a href="verduleria.html" class="btn">Ver Catálogo</a>
+        </div>
 
-    <div class="search-container">
-        <input type="text" id="search-input" class="search-bar" placeholder="🔍 Buscar corte (ej: asado, milanesas)..." onkeyup="filtrarProductos()">
+        <!-- SECCIÓN CARNICERÍA -->
+        <div class="card carniceria">
+            <div>
+                <h2>Carnicería Eliana</h2>
+                <p>Los mejores cortes de carne, asado, milanesas preparadas y ofertas especiales para tu hogar.</p>
+            </div>
+            <a href="carniceria.html" class="btn">Ver Catálogo</a>
+        </div>
+
+        <!-- SECCIÓN LIBRERÍA JUGUETERÍA -->
+        <div class="card libreria">
+            <div>
+                <h2>Librería Juguetería Eliana</h2>
+                <p>Artículos escolares, resmas, regalería, juegos de mesa y los mejores juguetes para todas las edades.</p>
+            </div>
+            <a href="libreria.html" class="btn">Ver Catálogo</a>
+        </div>
     </div>
 
-    <p id="no-results-msg" class="no-results">No se encontraron productos con ese nombre.</p>
+    <!-- SECCIÓN: NUESTROS LOCALES -->
+    <div class="sucursales-section">
+        <h2>Nuestros Locales</h2>
+        <p class="subtitle">🗓️ Abiertos de Lunes a Domingo (Solo retiro en local - No hacemos a domicilio)</p>
 
-    <div class="grid" id="products-grid">
-        <div class="item">
-            <h3 class="product-name">Milanesas Preparadas</h3>
-            <p>kl</p>
-            <p class="price">$5500</p>
-            <a href="#" onclick="consultarProducto('Milanesas Preparadas', '5500', 'kl')" class="btn-wsp">Consultar</a>
+        <div class="sucursal-item">
+            <div class="sucursal-title">📚 Librería y Juguetería</div>
+            <div class="sucursal-info">
+                📍 <strong>Dirección:</strong> Calle 5 N° 1366, Pedro Luro<br>
+                🕐 <strong>Horario:</strong> de 7:00 a 21:00 hs<br>
+                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
+            </div>
         </div>
-        <div class="item">
-            <h3 class="product-name">Asado</h3>
-            <p>kl</p>
-            <p class="price">$7000</p>
-            <a href="#" onclick="consultarProducto('Asado', '7000', 'kl')" class="btn-wsp">Consultar</a>
+
+        <div class="sucursal-item">
+            <div class="sucursal-title">🥩 Carnicería</div>
+            <div class="sucursal-info">
+                📍 <strong>Dirección:</strong> Calle 101 N° 1077, Pedro Luro<br>
+                🕐 <strong>Horario:</strong> de 8:00 a 13:00 hs y de 17:00 a 22:00 hs<br>
+                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
+            </div>
+        </div>
+
+        <div class="sucursal-item">
+            <div class="sucursal-title">🥑 Verdulería</div>
+            <div class="sucursal-info">
+                📍 <strong>Dirección:</strong> Calle 101 N° 1117, Pedro Luro<br>
+                🕐 <strong>Horario:</strong> de 4:00 a 21:00 hs<br>
+                🔗 <a class="map-link" href="https://google.com" target="_blank">🗺️ Ver en el mapa</a>
+            </div>
         </div>
     </div>
 
-    <script>
-        function filtrarProductos() {
-            let input = document.getElementById('search-input').value.toLowerCase();
-            let items = document.getElementsByClassName('item');
-            let noResults = document.getElementById('no-results-msg');
-            let encontrados = 0;
-
-            for (let i = 0; i < items.length; i++) {
-                let name = items[i].getElementsByClassName('product-name')[0].innerHTML.toLowerCase();
-                if (name.includes(input)) {
-                    items[i].style.display = "flex";
-                    encontrados++;
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-            if (encontrados === 0) { noResults.style.display = "block"; } 
-            else { noResults.style.display = "none"; }
-        }
-
-        // CORREGIDO: Mensaje configurado para enviar la consulta exacta a la Carnicería
-        function consultarProducto(nombre, precio, unidad) {
-            let numeroTelefono = "542914707417";
-            let mensaje = "Hola! Vi en la web que tienen " + nombre + " (" + unidad + " $" + precio + "). ¿Tienen stock disponible para pasar a buscar por el local de la Carnicería?";
-            let enlaceWhatsApp = "https://whatsapp.com" + numeroTelefono + "&text=" + encodeURIComponent(mensaje);
-            window.open(enlaceWhatsApp, '_blank');
-        }
-    </script>
+    <footer>
+        <p>Contacto Central: <a href="https://whatsapp.com">291 470-7417</a> | © 2026 Comercios Eliana</p>
+    </footer>
 
 </body>
 </html>
