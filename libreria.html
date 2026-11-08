@@ -1,83 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librería Juguetería Eliana - Catálogo</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #f4f6f9; color: #333; text-align: center; }
-        header { background-color: #2980b9; color: white; padding: 30px 20px; }
-        .back-btn { display: inline-block; margin: 20px 0; color: #2980b9; text-decoration: none; font-weight: bold; }
-        .search-container { max-width: 500px; margin: 20px auto; padding: 0 20px; }
-        .search-bar { width: 100%; padding: 12px 20px; border: 2px solid #2980b9; border-radius: 25px; font-size: 1rem; outline: none; }
-        .grid { max-width: 900px; margin: 10px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .item { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
-        .price { color: #2980b9; font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
-        .btn-wsp { display: inline-block; background-color: #25d366; color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; transition: background 0.2s; }
-        .btn-wsp:hover { background-color: #20ba5a; }
-        .no-results { display: none; margin: 40px auto; color: #666; font-size: 1.1rem; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>Librería Juguetería Eliana</h1>
-        <p>Útiles escolares, comerciales, regalos y juegos para todas las edades</p>
-    </header>
-
-    <a href="index.html" class="back-btn">⬅ Volver al Inicio</a>
-
-    <!-- BUSCADOR -->
-    <div class="search-container">
-        <input type="text" id="search-input" class="search-bar" placeholder="🔍 Buscar útiles o juguetes..." onkeyup="filtrarProductos()">
-    </div>
-
-    <p id="no-results-msg" class="no-results">No se encontraron productos con ese nombre.</p>
-
-    <!-- LISTA DE PRODUCTOS -->
-    <div class="grid" id="products-grid">
-        <div class="item">
-            <h3 class="product-name">Resma A4</h3>
-            <p>unidad</p>
-            <p class="price">$4500</p>
-            <a href="#" onclick="consultarProducto('Resma A4', '4500', 'unidad')" class="btn-wsp">Consultar</a>
-        </div>
-        <div class="item">
-            <h3 class="product-name">Cuaderno Rivadavia</h3>
-            <p>unidad</p>
-            <p class="price">$3200</p>
-            <a href="#" onclick="consultarProducto('Cuaderno Rivadavia', '3200', 'unidad')" class="btn-wsp">Consultar</a>
-        </div>
-    </div>
-
-    <script>
-        function filtrarProductos() {
-            let input = document.getElementById('search-input').value.toLowerCase();
-            let items = document.getElementsByClassName('item');
-            let noResults = document.getElementById('no-results-msg');
-            let encontrados = 0;
-
-            for (let i = 0; i < items.length; i++) {
-                let name = items[i].getElementsByClassName('product-name')[0].innerHTML.toLowerCase();
-                if (name.includes(input)) {
-                    items[i].style.display = "flex";
-                    encontrados++;
-                } else {
-                    items[i].style.display = "none";
-                }
-            }
-            if (encontrados === 0) { noResults.style.display = "block"; } 
-            else { noResults.style.display = "none"; }
-        }
-
-        function consultarProducto(nombre, precio, unidad) {
-    // CAMBIO CLAVE: Usamos el enlace completo oficial para ganarle al traductor
-    let numeroTelefono = "542914707417";
-    let mensaje = "Hola! Vi en la web que tienen " + nombre + " (" + unidad + " $" + precio + "). ¿Tienen stock disponible para pasar a buscar por el local?";
-    
-    // Aquí cambiamos 'wa.me' por '://whatsapp.com' que es inmune a las traducciones
-    let enlaceWhatsApp = "https://://whatsapp.com?phone=" + numeroTelefono + "&text=" + encodeURIComponent(mensaje);
-    window.open(enlaceWhatsApp, '_blank');
-}
-
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Catálogo de Librería y Juguetería Eliana en Pedro Luro. Precios ilustrativos y consultas por WhatsApp."><title>Librería y Juguetería Eliana | Catálogo</title><style>*{box-sizing:border-box}body{margin:0;background:#f4f6f2;color:#263329;font-family:Arial,Helvetica,sans-serif}.top{background:linear-gradient(135deg,#17253d,#2b4160);color:white;text-align:center;padding:24px 16px}.top small{letter-spacing:3px;color:#f4cc75;font-weight:bold}.top h1{font-size:clamp(28px,6vw,44px);margin:8px 0}.top h1 span{color:#f4cc75}.top p{margin:0;color:#e5eaf1}.wrap{max-width:1000px;margin:22px auto;padding:0 15px}.back{display:inline-block;color:#315a87;text-decoration:none;font-weight:bold;margin:0 0 16px}.panel{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 7px 24px #17253d12}.hero{padding:23px;color:white;background:linear-gradient(110deg,#17613b,#31965c)}.meat .hero{background:linear-gradient(110deg,#8c302b,#c45a50)}.book .hero{background:linear-gradient(110deg,#285b91,#528bc0)}.hero h2{margin:0 0 6px;font-size:27px}.hero p{margin:0}.hours{font-size:13px;margin-top:12px}.content{padding:20px}.notice{padding:11px 13px;background:#fff4d6;color:#765414;border-radius:10px;font-size:13px;font-weight:bold;margin-bottom:18px}.intro{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap}.intro h3{margin:0 0 4px;font-size:22px}.sub{font-size:13px;color:#7a857c}.search{border:1px solid #dce4dc;border-radius:10px;padding:11px 13px;font-size:14px;width:min(100%,270px)}.filters{display:flex;gap:8px;overflow:auto;padding:15px 0}.filters button{border:1px solid #dce5dc;border-radius:30px;background:#f8faf7;padding:9px 14px;white-space:nowrap;cursor:pointer;color:#425348;font-weight:bold}.filters button.active{background:#263b2d;color:white;border-color:#263b2d}.meat .filters button.active{background:#923c35}.book .filters button.active{background:#356da8}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.card{border:1px solid #e6ebe5;border-radius:15px;overflow:hidden;background:white;position:relative}.pic{height:130px;display:grid;place-items:center;font-size:62px;background:linear-gradient(135deg,#f0f7ed,#e4efe0)}.meat .pic{background:linear-gradient(135deg,#faeeee,#f2dfdd)}.book .pic{background:linear-gradient(135deg,#eef4fb,#dfeafa)}.ribbon{position:absolute;top:10px;left:10px;background:#f4c65f;color:#533b08;border-radius:20px;padding:6px 9px;font-size:11px;font-weight:bold}.info{padding:12px}.tag{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#7b897d;font-weight:bold}.info h4{font-size:17px;margin:5px 0 7px}.price{font-size:20px;font-weight:bold;color:#187a45}.meat .price{color:#a43e36}.book .price{color:#356da8}.old{font-size:12px;color:#89918a;text-decoration:line-through;margin-left:5px;font-weight:normal}.unit{font-size:12px;color:#858e86;margin-top:3px}.wa{display:block;width:100%;border:0;text-decoration:none;text-align:center;background:#16864b;color:#fff;border-radius:9px;padding:10px;margin-top:11px;font-size:13px;font-weight:bold;cursor:pointer}.meat .wa{background:#a44139}.book .wa{background:#356da8}.empty{display:none;text-align:center;padding:25px;color:#69766b}.foot{text-align:center;color:#849087;font-size:12px;padding:22px}@media(max-width:460px){.content{padding:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pic{height:112px}.info{padding:10px}.info h4{font-size:15px}.price{font-size:17px}.wa{font-size:11px;padding:9px}}</style></head>
+<body class="book"><header class="top"><small>CATÁLOGO DE</small><h1>📚 Librería y Juguetería Eliana</h1><p>Útiles, artículos de librería y juguetes</p></header><main class="wrap"><a class="back" href="index.html">← Volver a COMERCIOS ELIANA</a><section class="panel"><div class="hero"><h2>📚 Librería y Juguetería Eliana</h2><p>Útiles, artículos de librería y juguetes</p></div><div class="content"><div class="notice">⚠️ PRECIOS FICTICIOS DE EJEMPLO · No son precios vigentes.</div><div class="intro"><div><h3>Nuestros productos</h3><div class="sub">Elegí una categoría o buscá un producto</div></div><input class="search" id="search" type="search" placeholder="🔎 Buscar producto..." oninput="filterProducts()"></div><div class="filters"><button class="active" type="button" onclick="setCat('book','Todos',this)">Todos</button><button class="" type="button" onclick="setCat('book','Librería',this)">✏️ Librería</button><button class="" type="button" onclick="setCat('book','Escolar',this)">📒 Escolar</button><button class="" type="button" onclick="setCat('book','Ofertas',this)">⭐ Ofertas</button></div><div class="grid" id="grid"><article class="card" data-cat="Librería" data-name="resma a4"><div class="pic">📄</div><div class="info"><div class="tag">Librería</div><h4>Resma A4</h4><div class="price">$5.500</div><div class="unit">paquete x 500 hojas</div><button class="wa" type="button" onclick="contact('Resma A4')">Consultar por WhatsApp</button></div></article>
+<article class="card" data-cat="Escolar" data-name="cuaderno"><div class="pic">📓</div><div class="info"><div class="tag">Escolar</div><h4>Cuaderno</h4><div class="price">$3.800</div><div class="unit">unidad · modelo ilustrativo</div><button class="wa" type="button" onclick="contact('Cuaderno')">Consultar por WhatsApp</button></div></article>
+<article class="card" data-cat="Ofertas" data-name="lápices de colores"><span class="ribbon">OFERTA</span><div class="pic">✏️</div><div class="info"><div class="tag">Ofertas</div><h4>Lápices de colores</h4><div class="price">$2.000 <small class="old">$2.500</small></div><div class="unit">caja</div><button class="wa" type="button" onclick="contact('Lápices de colores')">Aprovechar oferta</button></div></article>
+<article class="card" data-cat="Librería" data-name="lapiceras"><div class="pic">🖊️</div><div class="info"><div class="tag">Librería</div><h4>Lapiceras</h4><div class="price">$700</div><div class="unit">unidad</div><button class="wa" type="button" onclick="contact('Lapiceras')">Consultar por WhatsApp</button></div></article>
+<article class="card" data-cat="Ofertas" data-name="juguete sorpresa"><span class="ribbon">OFERTA</span><div class="pic">🧸</div><div class="info"><div class="tag">Ofertas</div><h4>Juguete sorpresa</h4><div class="price">$4.500 <small class="old">$5.500</small></div><div class="unit">unidad · ejemplo</div><button class="wa" type="button" onclick="contact('Juguete sorpresa')">Aprovechar oferta</button></div></article></div><div class="empty" id="empty">No se encontraron productos con esa búsqueda.</div></div></section><footer class="foot">COMERCIOS ELIANA · Pedro Luro · Precios de muestra</footer></main>
+<script>
+let activeCategory="Todos";
+function setCat(category,button){activeCategory=category;document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));button.classList.add("active");filterProducts()}
+function filterProducts(){const q=document.getElementById("search").value.toLowerCase().trim();let count=0;document.querySelectorAll(".card").forEach(card=>{const categoryOk=activeCategory==="Todos"||(activeCategory==="Ofertas"?card.dataset.cat==="Ofertas":card.dataset.cat===activeCategory);const textOk=card.dataset.name.includes(q);card.style.display=categoryOk&&textOk?"":"none";if(categoryOk&&textOk)count++});document.getElementById("empty").style.display=count?"none":"block"}
+function contact(product){const message="Hola! Vi en el catálogo de Librería y Juguetería Eliana el producto "+product+". ¿Me confirman si tienen stock y el precio vigente?";window.open("https://wa.me/5492914707417?text="+encodeURIComponent(message),"_blank","noopener")}
+</script></body></html>
