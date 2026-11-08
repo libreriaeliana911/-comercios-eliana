@@ -1,114 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comercios Eliana</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f6f9; color: #333; text-align: center; }
-        header { background: linear-gradient(135deg, #2c3e50, #34495e); color: white; padding: 40px 20px; }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; letter-spacing: 1px; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
-        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 15px; padding: 30px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
-        .card:hover { transform: translateY(-5px); }
-        .card h2 { font-size: 1.6rem; margin-bottom: 15px; }
-        .verduleria h2 { color: #27ae60; }
-        .carniceria h2 { color: #c0392b; }
-        .libreria h2 { color: #2980b9; }
-        .card p { color: #666; font-size: 1rem; line-height: 1.5; margin-bottom: 25px; }
-        .btn { display: inline-block; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; color: white; transition: background 0.2s; }
-        .verduleria .btn { background-color: #27ae60; }
-        .verduleria .btn:hover { background-color: #219653; }
-        .carniceria .btn { background-color: #c0392b; }
-        .carniceria .btn:hover { background-color: #a02d22; }
-        .libreria .btn { background-color: #2980b9; }
-        .libreria .btn:hover { background-color: #206694; }
-        
-        .sucursales-section { max-width: 1000px; margin: 50px auto; padding: 30px 20px; background: white; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; }
-        .sucursales-section h2 { text-align: center; margin-bottom: 10px; color: #2c3e50; font-size: 1.8rem; }
-        .sucursales-section .subtitle { text-align: center; color: #7f8c8d; margin-bottom: 30px; font-weight: bold; }
-        .sucursal-item { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px dashed #e2e8f0; }
-        .sucursal-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .sucursal-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .sucursal-info { color: #555; font-size: 0.95rem; line-height: 1.6; margin-left: 28px; }
-        .map-link { display: inline-block; color: #3498db; text-decoration: none; font-weight: bold; margin-top: 5px; }
-        .map-link:hover { text-decoration: underline; }
-
-        footer { margin-top: 60px; background-color: #2c3e50; color: white; padding: 20px; font-size: 0.9rem; }
-        footer a { color: #f1c40f; text-decoration: none; font-weight: bold; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Comercios Eliana en Pedro Luro. Consultá productos y precios por WhatsApp y retiralos en el local.">
+<title>Comercios Eliana | Pedro Luro</title>
+<style>
+:root{--ink:#18243b;--muted:#647084;--paper:#f7f8fc;--white:#fff;--green:#239b62;--red:#c84b43;--blue:#287bb8;--gold:#ffd166;--shadow:0 18px 45px rgba(24,36,59,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}.topbar{background:#14213d;color:#fff;padding:10px 5vw;text-align:center;font-size:.9rem}.topbar a{color:#ffe08a;font-weight:800;text-decoration:none}
+.hero{padding:58px 5vw 52px;background:radial-gradient(circle at 85% 20%,rgba(255,209,102,.35),transparent 26%),linear-gradient(135deg,#18243b,#263e64);color:#fff}
+.hero-inner{max-width:1120px;margin:auto;text-align:center}.eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:.8rem;font-weight:900;color:#ffda83}.brand-title{font-size:clamp(3.2rem,10vw,7rem);line-height:.94;letter-spacing:-.055em;font-weight:1000;margin:18px auto 16px;max-width:1050px;text-transform:uppercase;color:#fff;text-shadow:0 5px 0 rgba(0,0,0,.12),0 14px 35px rgba(0,0,0,.25)}.brand-title span{display:inline-block;color:#ffda83}.brand-rule{width:110px;height:7px;border-radius:99px;background:#ffda83;margin:0 auto 22px}.hero h2{font-size:clamp(1.25rem,3vw,2rem);line-height:1.2;margin:0 0 12px;color:#fff}.hero p{font-size:1.05rem;line-height:1.6;max-width:650px;margin:0 auto;color:#e5ebf5}
+.wrap{width:min(1120px,90vw);margin:0 auto}.section-title{font-size:clamp(1.6rem,3vw,2.3rem);margin:0 0 10px}.section-sub{color:var(--muted);margin:0 0 26px;line-height:1.6}
+.shop-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:34px auto 56px}.shop-card{background:#fff;border-radius:24px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:270px;border:1px solid #edf0f6}.shop-icon{font-size:2.7rem}.shop-card h2{margin:14px 0 8px;font-size:1.35rem}.shop-card p{color:var(--muted);line-height:1.55;flex:1}.shop-card.veg{border-top:6px solid var(--green)}.shop-card.meat{border-top:6px solid var(--red)}.shop-card.book{border-top:6px solid var(--blue)}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;text-decoration:none;font-weight:800;border:0;cursor:pointer;background:var(--ink);color:#fff;transition:transform .18s,filter .18s}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.veg .btn{background:var(--green)}.meat .btn{background:var(--red)}.book .btn{background:var(--blue)}
+.locals{background:#fff;border-radius:24px;padding:30px;box-shadow:var(--shadow);margin:0 auto 55px}.local-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px}.local{background:#f7f8fc;border-radius:17px;padding:20px}.local h3{margin:0 0 10px}.local p{margin:7px 0;color:#4e5b70;line-height:1.5}.local a{color:#236ca5;font-weight:800;text-decoration:none}
+footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-height:1.7}footer a{color:#ffe08a;font-weight:800;text-decoration:none}
+.catalog-hero{padding:38px 5vw;background:linear-gradient(135deg,#18243b,#263e64);color:#fff}.catalog-hero .wrap{display:flex;align-items:center;gap:20px}.catalog-emoji{font-size:3rem}.catalog-hero h1{margin:0;font-size:clamp(1.8rem,4vw,2.8rem)}.catalog-hero p{margin:8px 0 0;color:#e5ebf5}
+.back{display:inline-block;margin:24px 0 10px;color:#315a87;text-decoration:none;font-weight:800}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:15px 0 25px}.search{flex:1;min-width:230px;border:1px solid #dce2ec;border-radius:999px;padding:14px 18px;font:inherit;outline:none;background:#fff}.search:focus{border-color:#658bb7;box-shadow:0 0 0 4px rgba(40,123,184,.12)}.hint{font-size:.88rem;color:var(--muted)}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;padding-bottom:55px}.product{background:#fff;border:1px solid #edf0f6;border-radius:20px;padding:22px;box-shadow:0 10px 28px rgba(24,36,59,.06);display:flex;flex-direction:column;min-height:220px}.product-emoji{font-size:2.5rem}.product h2{font-size:1.15rem;margin:12px 0 4px}.unit{color:var(--muted);font-size:.9rem}.price{font-size:1.5rem;font-weight:900;margin:12px 0 18px;color:var(--accent,var(--blue))}.product .btn{margin-top:auto;background:#20a464}.empty{display:none;padding:22px;text-align:center;color:var(--muted);background:#fff;border-radius:16px;margin:0 0 45px}
+.note{font-size:.88rem;color:var(--muted);padding:0 0 40px}
+@media(max-width:800px){.shop-grid,.local-grid{grid-template-columns:1fr}.hero{padding:44px 5vw}.locals{padding:22px}.catalog-hero .wrap{align-items:flex-start}.shop-card{min-height:unset}}
+</style>
 </head>
 <body>
-
-    <header>
-        <h1>Comercios Eliana</h1>
-        <p>Consultá el stock de nuestros locales para pasar a retirar</p>
-    </header>
-
-    <div class="container">
-        <!-- SECCIÓN VERDULERÍA -->
-        <div class="card verduleria">
-            <div>
-                <h2>Verdulería Eliana</h2>
-                <p>Frutas y verduras frescas, combos semanales y la mejor calidad para tu mesa todos los días.</p>
-            </div>
-            <a href="verduleria.html" class="btn">Ver Catálogo</a>
-        </div>
-
-        <!-- SECCIÓN CARNICERÍA -->
-        <div class="card carniceria">
-            <div>
-                <h2>Carnicería Eliana</h2>
-                <p>Los mejores cortes de carne, asado, milanesas preparadas y ofertas especiales para tu hogar.</p>
-            </div>
-            <a href="carniceria.html" class="btn">Ver Catálogo</a>
-        </div>
-
-        <!-- SECCIÓN LIBRERÍA JUGUETERÍA -->
-        <div class="card libreria">
-            <div>
-                <h2>Librería Juguetería Eliana</h2>
-                <p>Artículos escolares, resmas, regalería, juegos de mesa y los mejores juguetes para todas las edades.</p>
-            </div>
-            <a href="libreria.html" class="btn">Ver Catálogo</a>
-        </div>
+<div class="topbar">📍 Pedro Luro · Consultá online y retirás en el local · <a href="https://wa.me/542914707417">WhatsApp 291 470-7417</a></div>
+<header class="hero"><div class="hero-inner">
+  <div class="eyebrow">BIENVENIDOS A</div>
+  <h1 class="brand-title">COMERCIOS <span>ELIANA</span></h1>
+  <div class="brand-rule"></div>
+  <h2>Todo lo que necesitás, más cerca.</h2>
+  <p>Tres comercios, una misma atención. Conocé nuestros productos y consultá por WhatsApp.</p>
+</div></header>
+<main class="wrap">
+  <section class="shop-grid" aria-label="Nuestros comercios">
+    <article class="shop-card veg"><div class="shop-icon">🥑</div><h2>Verdulería Eliana</h2><p>Frutas y verduras frescas para todos los días. Consultá lo que tenemos disponible.</p><a class="btn" href="verduleria.html">Ver catálogo →</a></article>
+    <article class="shop-card meat"><div class="shop-icon">🥩</div><h2>Carnicería Eliana</h2><p>Cortes, asado y milanesas preparadas. Mirá los productos y consultá por WhatsApp.</p><a class="btn" href="carniceria.html">Ver catálogo →</a></article>
+    <article class="shop-card book"><div class="shop-icon">📚</div><h2>Librería y Juguetería Eliana</h2><p>Útiles escolares, resmas, regalería, juegos y juguetes para todas las edades.</p><a class="btn" href="libreria.html">Ver catálogo →</a></article>
+  </section>
+  <section class="locals">
+    <h2 class="section-title">Encontranos en Pedro Luro</h2>
+    <p class="section-sub">Atendemos de lunes a domingo. Por el momento, las compras son para retirar en el local; no hacemos envíos a domicilio.</p>
+    <div class="local-grid">
+      <article class="local"><h3>📚 Librería y Juguetería</h3><p>📍 Calle 5 N.º 1366, Pedro Luro</p><p>🕐 7:00 a 21:00 hs</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+5+1366+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
+      <article class="local"><h3>🥩 Carnicería</h3><p>📍 Calle 101 N.º 1077, Pedro Luro</p><p>🕐 8:00 a 13:00 y 17:00 a 22:00 hs</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+101+1077+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
+      <article class="local"><h3>🥑 Verdulería</h3><p>📍 Calle 101 N.º 1117, Pedro Luro</p><p>🕐 4:00 a 23:00 hs</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+101+1117+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
     </div>
-
-        <!-- SECCIÓN: NUESTROS LOCALES -->
-    <div class="sucursales-section">
-        <h2>Nuestros Locales</h2>
-        <p class="subtitle">🗓️ Abiertos de Lunes a Domingo (Solo retiro en local - No hacemos a domicilio)</p>
-
-        <div class="sucursal-item">
-            <div class="sucursal-title">📚 Librería y Juguetería</div>
-            <div class="sucursal-info">
-                📍 <strong>Dirección:</strong> Calle 5 N° 1366, Pedro Luro<br>
-                🕐 <strong>Horario:</strong> de 7:00 a 21:00 hs<br>
-                🔗 <a class="map-link" href="https://bing.com" target="_blank">🗺️ Ver en el mapa</a>
-            </div>
-        </div>
-
-        <div class="sucursal-item">
-            <div class="sucursal-title">🥩 Carnicería</div>
-            <div class="sucursal-info">
-                📍 <strong>Dirección:</strong> Calle 101 N° 1077, Pedro Luro<br>
-                🕐 <strong>Horario:</strong> de 8:00 a 13:00 hs y de 17:00 a 22:00 hs<br>
-                🔗 <a class="map-link" href="https://bing.com" target="_blank">🗺️ Ver en el mapa</a>
-            </div>
-        </div>
-
-        <div class="sucursal-item">
-            <div class="sucursal-title">🥑 Verdulería</div>
-            <div class="sucursal-info">
-                📍 <strong>Dirección:</strong> Calle 101 N° 1117, Pedro Luro<br>
-                🕐 <strong>Horario:</strong> de 4:00 a 21:00 hs<br>
-                🔗 <a class="map-link" href="https://bing.com" target="_blank">🗺️ Ver en el mapa</a>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>Contacto Central: <a href="https://whatsapp.com" target="_blank">291 470-7417</a> | © 2026 Comercios Eliana</p>
-    </footer>
+  </section>
+</main>
+<footer>¿Tenés alguna consulta? <a href="https://wa.me/542914707417">Escribinos por WhatsApp: 291 470-7417</a><br>© 2026 Comercios Eliana · Pedro Luro</footer>
+</body>
+</html>
