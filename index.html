@@ -103,7 +103,7 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
 <article class="review-example"><div class="review-stars" aria-label="5 de 5 estrellas">★★★★★</div><h3>Buena calidad</h3><p>Muy buena atención y productos. ¡Sigan así!</p></article>
 </div>
 <form class="review-form" id="review-form"><h3>Dejanos tu opinión</h3>
-<div class="review-fields"><div><label for="review-name">Tu nombre</label><input id="review-name" required maxlength="60" placeholder="¿Cómo te llamás?"></div><div><label for="review-rating">Calificación</label><select id="review-rating"><option value="5">★★★★★ — Excelente</option><option value="4">★★★★☆ — Muy bueno</option><option value="3">★★★☆☆ — Bueno</option><option value="2">★★☆☆☆ — Regular</option><option value="1">★☆☆☆☆ — Malo</option></select></div></div>
+<div class="review-fields"><div><label for="review-name">Tu nombre</label><input id="review-name" required maxlength="60" placeholder="¿Cómo te llamás?"></div><div><label for="review-rating">Calificación</label><select id="review-rating"><option value="5">★★★★★ — Excelente</option><option value="4">★★★★☆ — Muy bueno</option><option value="3">★★★☆☆ — Bueno</option><option value="2">★★☆☆☆ — Regular</option><option value="1">★☆☆☆☆ — Malo</option></select></div><div style="grid-column:1/-1"><label for="review-store">¿Sobre qué local querés opinar?</label><select id="review-store" required><option value="">Elegí un comercio</option><option value="Librería y Juguetería">📚 Librería y Juguetería</option><option value="Carnicería">🥩 Carnicería</option><option value="Verdulería">🥑 Verdulería</option></select></div></div>
 <label for="review-message">Tu comentario</label><textarea id="review-message" required maxlength="500" placeholder="Contanos cómo fue tu experiencia..."></textarea>
 <button type="submit">Enviar opinión por WhatsApp ↗</button><p class="review-note">La opinión se envía por WhatsApp para que podamos recibirla. No se publica automáticamente en esta página.</p>
 </form></section>
@@ -129,9 +129,10 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
   e.preventDefault();
   const name=document.getElementById('review-name').value.trim();
   const rating=document.getElementById('review-rating').value;
+  const store=document.getElementById('review-store').value;
   const message=document.getElementById('review-message').value.trim();
   const stars='★'.repeat(Number(rating))+'☆'.repeat(5-Number(rating));
-  const text='Hola, quiero dejar una opinión para Comercios Eliana.%0A%0ANombre: '+encodeURIComponent(name)+'%0ACalificación: '+encodeURIComponent(stars)+'%0AComentario: '+encodeURIComponent(message);
+  const text='Hola, quiero dejar una opinión para Comercios Eliana.%0A%0ALocal: '+encodeURIComponent(store)+'%0ANombre: '+encodeURIComponent(name)+'%0ACalificación: '+encodeURIComponent(stars)+'%0AComentario: '+encodeURIComponent(message);
   window.open('https://wa.me/542914707417?text='+text,'_blank','noopener');
  });
 })();
