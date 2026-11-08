@@ -46,13 +46,47 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
 .review-note{font-size:.82rem;color:var(--muted);margin:10px 0 0}
 @media(max-width:560px){.review-fields{grid-template-columns:1fr}}
 
+
+/* Compartir catálogo: agregado sin alterar el diseño original */
+.share-area{position:relative;margin-top:11px}
+.share-main{width:100%;display:flex;justify-content:center;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;border:1.5px solid currentColor;background:#fff;font:800 .96rem system-ui;cursor:pointer;transition:transform .18s,background .18s}
+.shop-card.veg .share-main{color:var(--green)}.shop-card.meat .share-main{color:var(--red)}.shop-card.book .share-main{color:var(--blue)}
+.share-main:hover{transform:translateY(-2px);background:#f8fafc}
+.share-options{display:none;gap:8px;flex-wrap:wrap;margin-top:9px}
+.share-options.open{display:flex}
+.share-option{flex:1 1 105px;padding:10px 9px;border:1px solid #e4e8ef;border-radius:12px;background:#f8fafc;color:var(--ink);font:700 .85rem system-ui;cursor:pointer}
+.share-option:hover{background:#eef2f8}
+.share-note{display:none;margin:7px 0 0;color:var(--muted);font-size:.78rem;text-align:center}
+.share-note.show{display:block}
+
 </style></head><body>
 <div class="topbar">📍 Pedro Luro · Consultá online y retirás en el local · <a href="https://wa.me/542914707417">WhatsApp 291 470-7417</a></div>
 <header class="hero"><div class="hero-inner"><div class="eyebrow">BIENVENIDOS A</div><h1 class="brand-title">COMERCIOS <span>ELIANA</span></h1><div class="brand-rule"></div><h2>Todo lo que necesitás, más cerca.</h2><p>Tres comercios, una misma atención. Conocé nuestros productos y consultá por WhatsApp.</p></div></header>
 <main class="wrap"><section class="shop-grid" aria-label="Nuestros comercios">
-<article class="shop-card veg"><div class="shop-icon">🥑</div><h2>Verdulería Eliana</h2><p>Frutas y verduras frescas para todos los días. Consultá lo que tenemos disponible.</p><a class="btn" href="verduleria.html?v=de7217af">Ver catálogo →</a></article>
-<article class="shop-card meat"><div class="shop-icon">🥩</div><h2>Carnicería Eliana</h2><p>Cortes, asado y milanesas preparadas. Mirá los productos y consultá por WhatsApp.</p><a class="btn" href="carniceria.html?v=de7217af">Ver catálogo →</a></article>
-<article class="shop-card book"><div class="shop-icon">📚</div><h2>Librería y Juguetería Eliana</h2><p>Útiles escolares, resmas, regalería, juegos y juguetes para todas las edades.</p><a class="btn" href="libreria.html?v=de7217af">Ver catálogo →</a></article></section>
+<article class="shop-card veg"><div class="shop-icon">🥑</div><h2>Verdulería Eliana</h2><p>Frutas y verduras frescas para todos los días. Consultá lo que tenemos disponible.</p><a class="btn" href="verduleria.html?v=de7217af">Ver catálogo →</a>
+<div class="share-area" data-share-url="https://libreriaeliana911.github.io/-comercios-eliana/verduleria.html" data-share-name="Verdulería Eliana">
+<button class="share-main" type="button" aria-expanded="false">↗ Compartir catálogo</button>
+<div class="share-options">
+<button class="share-option" type="button" data-action="whatsapp">WhatsApp</button>
+<button class="share-option" type="button" data-action="copy">Copiar enlace</button>
+<button class="share-option" type="button" data-action="native">Otras apps</button>
+</div><p class="share-note" aria-live="polite"></p></div></article>
+<article class="shop-card meat"><div class="shop-icon">🥩</div><h2>Carnicería Eliana</h2><p>Cortes, asado y milanesas preparadas. Mirá los productos y consultá por WhatsApp.</p><a class="btn" href="carniceria.html?v=de7217af">Ver catálogo →</a>
+<div class="share-area" data-share-url="https://libreriaeliana911.github.io/-comercios-eliana/carniceria.html" data-share-name="Carnicería Eliana">
+<button class="share-main" type="button" aria-expanded="false">↗ Compartir catálogo</button>
+<div class="share-options">
+<button class="share-option" type="button" data-action="whatsapp">WhatsApp</button>
+<button class="share-option" type="button" data-action="copy">Copiar enlace</button>
+<button class="share-option" type="button" data-action="native">Otras apps</button>
+</div><p class="share-note" aria-live="polite"></p></div></article>
+<article class="shop-card book"><div class="shop-icon">📚</div><h2>Librería y Juguetería Eliana</h2><p>Útiles escolares, resmas, regalería, juegos y juguetes para todas las edades.</p><a class="btn" href="libreria.html?v=de7217af">Ver catálogo →</a>
+<div class="share-area" data-share-url="https://libreriaeliana911.github.io/-comercios-eliana/libreria.html" data-share-name="Librería y Juguetería Eliana">
+<button class="share-main" type="button" aria-expanded="false">↗ Compartir catálogo</button>
+<div class="share-options">
+<button class="share-option" type="button" data-action="whatsapp">WhatsApp</button>
+<button class="share-option" type="button" data-action="copy">Copiar enlace</button>
+<button class="share-option" type="button" data-action="native">Otras apps</button>
+</div><p class="share-note" aria-live="polite"></p></div></article></section>
 <section class="offers-preview">
   <div class="offers-heading"><span class="offers-kicker">¡APROVECHÁ!</span><h2>Ofertas destacadas</h2><p>Promociones de nuestros tres comercios, en un solo lugar.</p></div>
   <div class="offers-grid">
@@ -102,4 +136,27 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
  });
 })();
 </script>
+
+<script>
+(function(){
+ document.querySelectorAll('.share-area').forEach(function(area){
+  var toggle=area.querySelector('.share-main'), options=area.querySelector('.share-options'), note=area.querySelector('.share-note');
+  var url=area.dataset.shareUrl, name=area.dataset.shareName;
+  function message(t){note.textContent=t;note.classList.add('show');}
+  toggle.addEventListener('click',function(){var open=options.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
+  area.querySelectorAll('[data-action]').forEach(function(btn){btn.addEventListener('click',async function(){
+   var action=btn.dataset.action, shareText='Mirá el catálogo de '+name+': '+url;
+   if(action==='whatsapp'){window.open('https://wa.me/?text='+encodeURIComponent(shareText),'_blank','noopener');}
+   else if(action==='copy'){
+    try{await navigator.clipboard.writeText(url);message('¡Enlace copiado! Ya podés pegarlo donde quieras.');}
+    catch(e){window.prompt('Copiá este enlace:',url);}
+   } else if(action==='native'){
+    if(navigator.share){try{await navigator.share({title:'Catálogo · '+name,text:'Mirá el catálogo de '+name,url:url});}catch(e){}}
+    else {window.open('https://wa.me/?text='+encodeURIComponent(shareText),'_blank','noopener');message('En este navegador, podés compartirlo por WhatsApp o copiar el enlace.');}
+   }
+  });});
+ });
+})();
+</script>
+
 </body></html>
