@@ -6,7 +6,7 @@
 <article class="card" data-cat="Carne vacuna" data-name="carne picada"><div class="pic">🥘</div><div class="info"><div class="tag">Carne vacuna</div><h4>Carne picada</h4><div class="price">$7.200</div><div class="unit">por kilo</div><button class="wa" type="button" onclick="contact('Carne picada')">Consultar por WhatsApp</button></div></article></div><div class="empty" id="empty">No se encontraron productos con esa búsqueda.</div></div></section><footer class="foot">COMERCIOS ELIANA · Pedro Luro · Precios de muestra</footer></main>
 <script>
 let activeCategory="Todos";
-function setCat(category,button){activeCategory=category;document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));button.classList.add("active");filterProducts()}
+function setCat(type,category,button){activeCategory=category;document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));button.classList.add("active");filterProducts()}
 function filterProducts(){const q=document.getElementById("search").value.toLowerCase().trim();let count=0;document.querySelectorAll(".card").forEach(card=>{const categoryOk=activeCategory==="Todos"||(activeCategory==="Ofertas"?card.dataset.cat==="Ofertas":card.dataset.cat===activeCategory);const textOk=card.dataset.name.includes(q);card.style.display=categoryOk&&textOk?"":"none";if(categoryOk&&textOk)count++});document.getElementById("empty").style.display=count?"none":"block"}
 function contact(product){const message="Hola! Vi en el catálogo de Carnicería Eliana el producto "+product+". ¿Me confirman si tienen stock y el precio vigente?";window.open("https://wa.me/5492914707417?text="+encodeURIComponent(message),"_blank","noopener")}
 </script></body></html>
