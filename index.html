@@ -22,6 +22,30 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
 .offers-heading{text-align:center;margin-bottom:25px}.offers-kicker{display:inline-block;background:#ffe08a;color:#624400;border-radius:99px;padding:6px 14px;font-size:.75rem;font-weight:1000;letter-spacing:.12em}.offers-heading h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:12px 0 6px}.offers-heading p{color:var(--muted);margin:0}.offers-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.offer-card{background:white;border:1px solid #edf0f6;border-radius:20px;padding:21px;box-shadow:0 10px 25px rgba(24,36,59,.07);text-align:center;overflow:hidden}.offer-top{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;font-weight:900;color:#536078}.offer-top b{background:#e5483f;color:white;padding:6px 10px;border-radius:99px;letter-spacing:.05em}.offer-emoji{font-size:3.5rem;margin:15px 0 5px}.offer-card h3{font-size:1.25rem;margin:5px 0}.offer-card p{color:var(--muted);margin:5px 0}.offer-price{font-size:2rem;font-weight:1000;color:#17243b;margin:10px 0 16px}.offer-price small{font-size:.9rem;color:#647084}.offer-link{display:block;background:#17243b;color:white;text-decoration:none;border-radius:99px;padding:12px 10px;font-weight:800;font-size:.9rem}.offer-veg{border-top:5px solid var(--green)}.offer-meat{border-top:5px solid var(--red)}.offer-book{border-top:5px solid var(--blue)}.offers-note{text-align:center;color:#7a6a49;font-size:.83rem;margin:18px 0 0}
 @media(max-width:800px){.offers-grid{grid-template-columns:1fr}.offers-preview{padding:22px}}
 
+
+/* Mejoras de vista previa: estado horario y opiniones */
+.status-pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;font-size:.82rem;font-weight:800;margin:8px 0 2px;background:#e8f7ee;color:#167443}
+.status-pill.closed{background:#fff0ef;color:#b43e37}
+.status-dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.reviews-section{margin:34px 0 42px;padding:clamp(22px,4vw,38px);border-radius:24px;background:#fff;box-shadow:var(--shadow)}
+.reviews-head{text-align:center;max-width:680px;margin:0 auto 24px}
+.reviews-head h2{margin:0 0 8px;font-size:clamp(1.6rem,3vw,2.15rem)}
+.reviews-head p{color:var(--muted);margin:0}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:24px}
+.review-example{padding:18px;border:1px solid #e8ebf2;border-radius:16px;background:#fbfcff}
+.review-stars{color:#e6a400;letter-spacing:2px;font-size:1.1rem}
+.review-example h3{font-size:1rem;margin:7px 0 5px}
+.review-example p{color:var(--muted);margin:0;font-size:.94rem}
+.review-form{max-width:720px;margin:0 auto;padding:20px;border-radius:16px;background:#f7f8fc}
+.review-form h3{margin:0 0 14px}
+.review-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.review-form label{display:block;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.review-form input,.review-form select,.review-form textarea{width:100%;padding:12px;border:1px solid #d9deea;border-radius:10px;font:inherit;background:white;color:var(--ink)}
+.review-form textarea{min-height:90px;resize:vertical;margin-bottom:12px}
+.review-form button{border:0;border-radius:999px;background:var(--green);color:white;font:inherit;font-weight:800;padding:12px 20px;cursor:pointer}
+.review-note{font-size:.82rem;color:var(--muted);margin:10px 0 0}
+@media(max-width:560px){.review-fields{grid-template-columns:1fr}}
+
 </style></head><body>
 <div class="topbar">📍 Pedro Luro · Consultá online y retirás en el local · <a href="https://wa.me/542914707417">WhatsApp 291 470-7417</a></div>
 <header class="hero"><div class="hero-inner"><div class="eyebrow">BIENVENIDOS A</div><h1 class="brand-title">COMERCIOS <span>ELIANA</span></h1><div class="brand-rule"></div><h2>Todo lo que necesitás, más cerca.</h2><p>Tres comercios, una misma atención. Conocé nuestros productos y consultá por WhatsApp.</p></div></header>
@@ -37,8 +61,45 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
     <article class="offer-card offer-book"><div class="offer-top"><span>📚 LIBRERÍA</span><b>OFERTA</b></div><div class="offer-emoji">📒</div><h3>Cuaderno escolar</h3><p>Precio de ejemplo por unidad</p><div class="offer-price">$2.500 <small>/ u.</small></div><a href="https://wa.me/542914707417?text=Hola%2C%20quiero%20consultar%20por%20la%20oferta%20del%20cuaderno" class="offer-link">Consultar por WhatsApp ↗</a></article>
   </div><p class="offers-note">* Precios ficticios, solo para mostrar el diseño. Se reemplazan por los precios reales antes de publicar.</p>
 </section>
+<section class="reviews-section" id="opiniones">
+<div class="reviews-head"><h2>Lo que dicen nuestros clientes</h2><p>Tu opinión nos ayuda a seguir mejorando. ¡Gracias por elegir Comercios Eliana!</p></div>
+<div class="reviews-grid">
+<article class="review-example"><div class="review-stars" aria-label="5 de 5 estrellas">★★★★★</div><h3>¡Muy buena atención!</h3><p>Siempre encuentro lo que necesito y me atienden con mucha amabilidad.</p></article>
+<article class="review-example"><div class="review-stars" aria-label="5 de 5 estrellas">★★★★★</div><h3>Todo en un mismo lugar</h3><p>Es muy práctico tener los comercios cerca y poder consultar por WhatsApp.</p></article>
+<article class="review-example"><div class="review-stars" aria-label="5 de 5 estrellas">★★★★★</div><h3>Buena calidad</h3><p>Muy buena atención y productos. ¡Sigan así!</p></article>
+</div>
+<form class="review-form" id="review-form"><h3>Dejanos tu opinión</h3>
+<div class="review-fields"><div><label for="review-name">Tu nombre</label><input id="review-name" required maxlength="60" placeholder="¿Cómo te llamás?"></div><div><label for="review-rating">Calificación</label><select id="review-rating"><option value="5">★★★★★ — Excelente</option><option value="4">★★★★☆ — Muy bueno</option><option value="3">★★★☆☆ — Bueno</option><option value="2">★★☆☆☆ — Regular</option><option value="1">★☆☆☆☆ — Malo</option></select></div></div>
+<label for="review-message">Tu comentario</label><textarea id="review-message" required maxlength="500" placeholder="Contanos cómo fue tu experiencia..."></textarea>
+<button type="submit">Enviar opinión por WhatsApp ↗</button><p class="review-note">La opinión se envía por WhatsApp para que podamos recibirla. No se publica automáticamente en esta página.</p>
+</form></section>
 <section class="locals"><h2 class="section-title">Encontranos en Pedro Luro</h2><p class="section-sub">Atendemos de lunes a domingo. Por el momento, las compras son para retirar en el local; no hacemos envíos a domicilio.</p><div class="local-grid">
-<article class="local"><h3>📚 Librería y Juguetería</h3><p>📍 Calle 5 N.º 1366, Pedro Luro</p><p>🕐 7:00 a 21:00 hs</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+5+1366+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
-<article class="local"><h3>🥩 Carnicería</h3><p>📍 Calle 101 N.º 1077, Pedro Luro</p><p>🕐 8:00 a 13:00 y 17:00 a 22:00 hs</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+101+1077+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
-<article class="local"><h3>🥑 Verdulería</h3><p>📍 Calle 101 N.º 1117, Pedro Luro</p><p>🕐 4:00 a 23:00 hs</p><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+101+1117+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
-</div></section></main><footer>¿Tenés alguna consulta? <a href="https://wa.me/542914707417">Escribinos por WhatsApp: 291 470-7417</a><br>© 2026 Comercios Eliana · Pedro Luro</footer></body></html>
+<article class="local"><h3>📚 Librería y Juguetería</h3><p>📍 Calle 5 N.º 1366, Pedro Luro</p><p>🕐 7:00 a 21:00 hs</p><div class="status-pill" data-store="book"><span class="status-dot"></span><span>Consultando horario…</span></div><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+5+1366+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
+<article class="local"><h3>🥩 Carnicería</h3><p>📍 Calle 101 N.º 1077, Pedro Luro</p><p>🕐 8:00 a 13:00 y 17:00 a 22:00 hs</p><div class="status-pill" data-store="meat"><span class="status-dot"></span><span>Consultando horario…</span></div><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+101+1077+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
+<article class="local"><h3>🥑 Verdulería</h3><p>📍 Calle 101 N.º 1117, Pedro Luro</p><p>🕐 4:00 a 23:00 hs</p><div class="status-pill" data-store="veg"><span class="status-dot"></span><span>Consultando horario…</span></div><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Calle+101+1117+Pedro+Luro+Buenos+Aires">Cómo llegar ↗</a></article>
+</div></section></main><footer>¿Tenés alguna consulta? <a href="https://wa.me/542914707417">Escribinos por WhatsApp: 291 470-7417</a><br>© 2026 Comercios Eliana · Pedro Luro</footer><script>
+(function(){
+ const schedules={book:[[7*60,21*60]],meat:[[8*60,13*60],[17*60,22*60]],veg:[[4*60,23*60]]};
+ function updateStoreStatus(){
+  const now=new Date(), minutes=now.getHours()*60+now.getMinutes();
+  document.querySelectorAll('[data-store]').forEach(el=>{
+   const open=schedules[el.dataset.store].some(([start,end])=>minutes>=start&&minutes<end);
+   el.classList.toggle('closed',!open);
+   const label=el.querySelector('span:last-child');
+   if(label) label.textContent=open?'ABIERTO AHORA':'CERRADO AHORA';
+  });
+ }
+ updateStoreStatus(); setInterval(updateStoreStatus,30000);
+ const form=document.getElementById('review-form');
+ if(form) form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const name=document.getElementById('review-name').value.trim();
+  const rating=document.getElementById('review-rating').value;
+  const message=document.getElementById('review-message').value.trim();
+  const stars='★'.repeat(Number(rating))+'☆'.repeat(5-Number(rating));
+  const text='Hola, quiero dejar una opinión para Comercios Eliana.%0A%0ANombre: '+encodeURIComponent(name)+'%0ACalificación: '+encodeURIComponent(stars)+'%0AComentario: '+encodeURIComponent(message);
+  window.open('https://wa.me/542914707417?text='+text,'_blank','noopener');
+ });
+})();
+</script>
+</body></html>
