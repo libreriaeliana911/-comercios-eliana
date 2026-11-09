@@ -65,6 +65,17 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
 .share-note{display:none;margin:7px 0 0;color:var(--muted);font-size:.78rem;text-align:center}
 .share-note.show{display:block}
 
+.payment-section{margin:0 auto 42px;padding:34px;background:#fff;border:1px solid #e9edf4;border-radius:26px;box-shadow:var(--shadow)}
+.payment-heading{text-align:center;max-width:700px;margin:0 auto 24px}
+.payment-heading .payment-kicker{display:inline-block;background:#e7f5ed;color:#167443;border-radius:99px;padding:6px 14px;font-size:.75rem;font-weight:900;letter-spacing:.08em}
+.payment-heading h2{font-size:clamp(1.6rem,4vw,2.25rem);margin:12px 0 7px}
+.payment-heading p{color:var(--muted);margin:0}
+.payment-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.payment-card{background:#f7f9fc;border:1px solid #e9edf4;border-radius:18px;padding:22px 14px;text-align:center}
+.payment-icon{width:58px;height:58px;margin:0 auto 12px;display:grid;place-items:center;border-radius:18px;background:#e7f5ed;color:#167443;font-size:2rem}
+.payment-card h3{font-size:1rem;margin:0}
+.payment-note{text-align:center;color:var(--muted);font-size:.88rem;margin:20px 0 0}
+@media(max-width:800px){.payment-section{padding:22px}.payment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head><body>
 <div class="topbar">📍 Pedro Luro · Consultá online y retirás en el local · <a href="https://wa.me/542914707417">WhatsApp 291 470-7417</a></div>
 <header class="hero"><div class="hero-inner"><div class="eyebrow">BIENVENIDOS A</div><h1 class="brand-title">COMERCIOS <span>ELIANA</span></h1><div class="brand-rule"></div><h2>Todo lo que necesitás, más cerca.</h2><p>Tres comercios, una misma atención. Conocé nuestros productos y consultá por WhatsApp.</p></div></header>
@@ -102,6 +113,20 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
     <article class="offer-card"><div class="offer-top"><span>🍷 OFERTA ESPECIAL</span><b>2 CAJAS DE VINO</b></div><div class="offer-product-image"><img src="images/resero.webp" alt="Caja de vino Resero de un litro"></div><h3>Vino Resero</h3><p>¡Llevá 2 vinos por solo!</p><div class="offer-price">$4.000 <small>las 2 botellas</small></div><a href="https://wa.me/542914707417?text=Hola%2C%20quiero%20consultar%20por%20la%20oferta%20de%20Vino%20Resero%202%20por%204000" class="offer-link">Consultar por WhatsApp ↗</a></article>
     <article class="offer-card"><div class="offer-top"><span>🥤 OFERTA ESPECIAL</span><b>2 BOTELLAS</b></div><div class="offer-product-image manaos-product-image"><img src="images/manaos.webp" alt="Botella de gaseosa Manaos de tres litros"></div><h3>Gaseosa Manaos</h3><p>¡Llevá 2 Manaos por solo!</p><div class="offer-price">$4.500 <small>las 2 botellas</small></div><a href="https://wa.me/542914707417?text=Hola%2C%20quiero%20consultar%20por%20la%20oferta%20de%20Manaos%202%20por%204500" class="offer-link">Consultar por WhatsApp ↗</a></article>
   </div><p class="offers-note">* Los precios de las otras ofertas son de ejemplo.</p>
+</section>
+<section class="payment-section" id="medios-de-pago">
+  <div class="payment-heading">
+    <span class="payment-kicker">COMERCIOS ELIANA</span>
+    <h2>💳 ¿Cómo podés pagar en nuestros locales?</h2>
+    <p>En nuestros locales contamos con estos medios de pago:</p>
+  </div>
+  <div class="payment-grid">
+    <article class="payment-card"><div class="payment-icon" aria-hidden="true">💵</div><h3>Efectivo</h3></article>
+    <article class="payment-card"><div class="payment-icon" aria-hidden="true">💳</div><h3>Tarjeta de débito y crédito</h3></article>
+    <article class="payment-card"><div class="payment-icon" aria-hidden="true">📱</div><h3>Transferencia bancaria</h3></article>
+    <article class="payment-card"><div class="payment-icon" aria-hidden="true">▦</div><h3>Pago con QR</h3></article>
+  </div>
+  <p class="payment-note">¡Elegí el medio de pago que más te convenga!</p>
 </section>
 <section class="reviews-section" id="opiniones">
 <div class="reviews-head"><h2>Lo que dicen nuestros clientes</h2><p>Tu opinión nos ayuda a seguir mejorando. ¡Gracias por elegir Comercios Eliana!</p></div>
