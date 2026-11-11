@@ -252,7 +252,7 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
   offers.forEach(o=>{
    const card=document.createElement('article');card.className='offer-card';
    const store=o.comercio==='Verdulería'?'offer-veg':o.comercio==='Carnicería'?'offer-meat':'offer-book';const storeLabel=o.comercio==='Verdulería'?'🥑 VERDULERÍA':o.comercio==='Carnicería'?'🥩 CARNICERÍA':'📚 LIBRERÍA';card.classList.add(store);
-   const photo=o.foto_url?'<img src="'+String(o.foto_url).replace(/"/g,'&quot;')+'" alt="'+String(o.titulo||'Oferta').replace(/</g,'&lt;')+'">':'';
+   const fallbackImage=/resero/i.test(o.titulo||'')?'images/resero.webp':/manaos/i.test(o.titulo||'')?'images/manaos.webp':'';const imageUrl=o.foto_url||fallbackImage;const photo=imageUrl?'<img src="'+String(imageUrl).replace(/"/g,'&quot;')+'" alt="'+String(o.titulo||'Oferta').replace(/</g,'&lt;')+'">':'';
    const media=photo?'<div class="offer-product-image">'+photo+'</div>':'<div class="offer-emoji">🏷️</div>';
    const title=String(o.titulo||'Oferta').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
    const price=String(o.precio||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
