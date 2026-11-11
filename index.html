@@ -106,7 +106,7 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
 </div><p class="share-note" aria-live="polite"></p></div></article></section>
 <section class="offers-preview">
   <div class="offers-heading"><span class="offers-kicker">¡APROVECHÁ!</span><h2>Ofertas destacadas</h2><p>Promociones de nuestros tres comercios, en un solo lugar.</p></div>
-  <div class="offers-grid">
+  <div class="offers-grid"><div id="managedHomeOffers" style="display:contents"></div>
     <article class="offer-card offer-veg"><div class="offer-top"><span>🥑 VERDULERÍA</span><b>OFERTA</b></div><div class="offer-emoji">🍊</div><h3>Naranja para jugo</h3><p>Precio de ejemplo por kilo</p><div class="offer-price">$1.500 <small>/ kg</small></div><a href="https://wa.me/542914707417?text=Hola%2C%20quiero%20consultar%20por%20la%20oferta%20de%20naranjas" class="offer-link">Consultar por WhatsApp ↗</a></article>
     <article class="offer-card offer-meat"><div class="offer-top"><span>🥩 CARNICERÍA</span><b>OFERTA</b></div><div class="offer-emoji">🥩</div><h3>Carne picada</h3><p>Precio de ejemplo por kilo</p><div class="offer-price">$8.900 <small>/ kg</small></div><a href="https://wa.me/542914707417?text=Hola%2C%20quiero%20consultar%20por%20la%20oferta%20de%20carne%20picada" class="offer-link">Consultar por WhatsApp ↗</a></article>
     <article class="offer-card offer-book"><div class="offer-top"><span>📚 LIBRERÍA</span><b>OFERTA</b></div><div class="offer-emoji">📒</div><h3>Cuaderno escolar</h3><p>Precio de ejemplo por unidad</p><div class="offer-price">$2.500 <small>/ u.</small></div><a href="https://wa.me/542914707417?text=Hola%2C%20quiero%20consultar%20por%20la%20oferta%20del%20cuaderno" class="offer-link">Consultar por WhatsApp ↗</a></article>
@@ -244,4 +244,30 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
 })();
 </script>
 
+
+<script>
+(async function(){
+ try{
+  const url='https://bvowhugolrhjhusdvuzp.supabase.co';
+  const key='sb_publishable_rmuZurklxRlhCxfMPyrleA_udWU84bT';
+  const response=await fetch(url+'/rest/v1/ofertas?select=*&activa=eq.true',{headers:{apikey:key,Authorization:'Bearer '+key}});
+  if(!response.ok)return;
+  const today=new Date().toLocaleDateString('en-CA');
+  const offers=(await response.json()).filter(o=>o.ubicaciones&&o.ubicaciones.inicio&&(!o.fecha_inicio||o.fecha_inicio<=today)&&(!o.fecha_fin||o.fecha_fin>=today)).sort((a,b)=>(Number(a.ubicaciones.inicio.posicion)||999)-(Number(b.ubicaciones.inicio.posicion)||999));
+  const grid=document.querySelector('.offers-grid');if(!grid)return;
+  offers.forEach(o=>{
+   const card=document.createElement('article');card.className='offer-card';
+   const store=o.comercio==='Verdulería'?'offer-veg':o.comercio==='Carnicería'?'offer-meat':'offer-book';card.classList.add(store);
+   const photo=o.foto_url?'<img src="'+String(o.foto_url).replace(/"/g,'&quot;')+'" alt="'+String(o.titulo||'Oferta').replace(/</g,'&lt;')+'">':'';
+   const media=photo?'<div class="offer-product-image">'+photo+'</div>':'<div class="offer-emoji">🏷️</div>';
+   const title=String(o.titulo||'Oferta').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+   const price=String(o.precio||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+   const desc=String(o.descripcion||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+   card.innerHTML='<div class="offer-top"><span>'+store.replace('offer-','').toUpperCase()+'</span><b>OFERTA</b></div>'+media+'<h3>'+title+'</h3><p>'+desc+'</p><div class="offer-price">'+price+'</div><a class="offer-link" href="https://wa.me/542914707417?text='+encodeURIComponent('Hola, quiero consultar por la oferta de '+o.titulo)+'">Consultar por WhatsApp ↗</a>';
+   const pos=Math.max(1,Number(o.ubicaciones.inicio.posicion)||grid.children.length+1);
+   grid.insertBefore(card,grid.children[pos-1]||null);
+  });
+ }catch(e){console.warn('No se pudieron cargar las ofertas administradas:',e)}
+})();
+</script>
 </body></html>
