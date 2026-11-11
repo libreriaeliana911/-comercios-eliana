@@ -1,0 +1,13 @@
+{
+  "name": "Admin Eliana",
+  "short_name": "Admin Eliana",
+  "description": "Administración de Comercios Eliana",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7f5",
+  "theme_color": "#173b32",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
