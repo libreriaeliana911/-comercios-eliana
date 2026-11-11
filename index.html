@@ -257,13 +257,13 @@ footer{background:#14213d;color:#e7edf7;text-align:center;padding:25px 5vw;line-
   const grid=document.querySelector('.offers-grid');if(!grid)return;
   offers.forEach(o=>{
    const card=document.createElement('article');card.className='offer-card';
-   const store=o.comercio==='Verdulería'?'offer-veg':o.comercio==='Carnicería'?'offer-meat':'offer-book';card.classList.add(store);
+   const store=o.comercio==='Verdulería'?'offer-veg':o.comercio==='Carnicería'?'offer-meat':'offer-book';const storeLabel=o.comercio==='Verdulería'?'🥑 VERDULERÍA':o.comercio==='Carnicería'?'🥩 CARNICERÍA':'📚 LIBRERÍA';card.classList.add(store);
    const photo=o.foto_url?'<img src="'+String(o.foto_url).replace(/"/g,'&quot;')+'" alt="'+String(o.titulo||'Oferta').replace(/</g,'&lt;')+'">':'';
    const media=photo?'<div class="offer-product-image">'+photo+'</div>':'<div class="offer-emoji">🏷️</div>';
    const title=String(o.titulo||'Oferta').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
    const price=String(o.precio||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
    const desc=String(o.descripcion||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-   card.innerHTML='<div class="offer-top"><span>'+store.replace('offer-','').toUpperCase()+'</span><b>OFERTA</b></div>'+media+'<h3>'+title+'</h3><p>'+desc+'</p><div class="offer-price">'+price+'</div><a class="offer-link" href="https://wa.me/542914707417?text='+encodeURIComponent('Hola, quiero consultar por la oferta de '+o.titulo)+'">Consultar por WhatsApp ↗</a>';
+   card.innerHTML='<div class="offer-top"><span>'+storeLabel+'</span><b>OFERTA</b></div>'+media+'<h3>'+title+'</h3><p>'+desc+'</p><div class="offer-price">'+price+'</div><a class="offer-link" href="https://wa.me/542914707417?text='+encodeURIComponent('Hola, quiero consultar por la oferta de '+o.titulo)+'">Consultar por WhatsApp ↗</a>';
    const pos=Math.max(1,Number(o.ubicaciones.inicio.posicion)||grid.children.length+1);
    grid.insertBefore(card,grid.children[pos-1]||null);
   });
