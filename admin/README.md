@@ -1,17 +1,18 @@
-# ADMIN ELIANA — prototipo inicial
+# ADMIN ELIANA — conexión del catálogo (preparación)
 
-Este directorio se creó en la rama `admin-eliana`, separado de la página pública.
+Este panel vive en la rama `admin-eliana`. La página pública en `main` no fue modificada.
 
-## Qué incluye esta primera etapa
-- Panel adaptable a celular y computadora.
-- Secciones Inicio, Productos, Ofertas, Clientes y Opiniones.
-- Alta, edición, eliminación y cambio de stock de productos.
-- Selección de fotos desde el dispositivo.
-- Alta, pausa y eliminación de ofertas.
-- Manifest y service worker para preparar la instalación como PWA.
+## Estado actual
+- La interfaz inicial de administración todavía guarda productos y ofertas en el navegador.
+- El sitio público usa el proyecto Supabase `bvowhugolrhjhusdvuzp` para el contador y envío de opiniones.
+- Se agregó `supabase-schema.sql` para crear las tablas compartidas `productos` y `ofertas`, con lectura pública y escritura restringida a administradores autorizados.
+- **Todavía no está conectado en producción**: crear las tablas y autorizar el usuario administrador requiere una acción desde el panel de Supabase. No se debe poner una clave `service_role` en el navegador.
 
-## Importante
-Esta versión es un prototipo de interfaz. Los cambios se guardan únicamente en el navegador mediante localStorage y **no** modifican los catálogos públicos ni se sincronizan entre dispositivos. No hay autenticación real; no cargar datos personales ni información real de clientes.
+## Activación necesaria en Supabase
+1. Abrir el proyecto existente: https://supabase.com/dashboard/project/bvowhugolrhjhusdvuzp
+2. Ir a SQL Editor, pegar el contenido completo de `supabase-schema.sql` y ejecutar.
+3. En Authentication > Users, crear el usuario que se usará para entrar a ADMIN ELIANA.
+4. Copiar el UUID de ese usuario y ejecutar en SQL Editor:
+   `insert into public.admin_eliana_users (user_id) values ('UUID-DEL-USUARIO');`
 
-## Antes de usarla en el negocio
-Hay que conectar autenticación segura, base de datos y almacenamiento de imágenes (por ejemplo, Supabase), definir permisos/RLS y enlazar los catálogos públicos a esas tablas. También hay que integrar las opiniones existentes. La rama de prototipo no publica ni altera el sitio actual.
+Hasta completar estos pasos, no cargar datos reales ni considerar activo el panel conectado. La clave pública existente del sitio no permite crear tablas ni conceder permisos administrativos.
