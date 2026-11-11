@@ -9,19 +9,34 @@
 <script>
 let activeCategory="Todos";
 function setCat(type,category,button){activeCategory=category;document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));button.classList.add("active");filterProducts()}
-function filterProducts(){const q=document.getElementById("search").value.toLowerCase().trim();let count=0;document.querySelectorAll(".card").forEach(card=>{const cardCategory=card.dataset.cat.replace(/^Ofertas\\s*/, "");const categoryOk=activeCategory==="Todos"||(activeCategory==="Ofertas"?card.dataset.cat.startsWith("Ofertas"):cardCategory===activeCategory);const textOk=card.dataset.name.includes(q);card.style.display=categoryOk&&textOk?"":"none";if(categoryOk&&textOk)count++});document.getElementById("empty").style.display=count?"none":"block"}
+function filterProducts(){const q=document.getElementById("search").value.toLowerCase().trim();let count=0;document.querySelectorAll(".card").forEach(card=>{const cardCategory=card.dataset.cat.replace(/^Ofertas\s*/, "");const categoryOk=activeCategory==="Todos"||(activeCategory==="Ofertas"?card.dataset.cat.startsWith("Ofertas"):cardCategory===activeCategory);const textOk=card.dataset.name.includes(q);card.style.display=categoryOk&&textOk?"":"none";if(categoryOk&&textOk)count++});document.getElementById("empty").style.display=count?"none":"block"}
 function contact(product){const message="Hola! Vi en el catálogo de Carnicería Eliana el producto "+product+". ¿Me confirman si tienen stock y el precio vigente?";window.open("https://wa.me/5492914707417?text="+encodeURIComponent(message),"_blank","noopener")}
 </script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-(async function(){try{
-const sb=window.supabase.createClient('https://bvowhugolrhjhusdvuzp.supabase.co','sb_publishable_rmuZurklxRlhCxfMPyrleA_udWU84bT');
-const {data,error}=await sb.from('productos').select('*').eq('comercio','Carnicería').eq('activo',true).order('orden').order('created_at',{ascending:false});
-if(error)throw error;
-const grid=document.getElementById('grid');if(!grid)return;
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const money=v=>String(v??'').trim().startsWith('$')?String(v):'$'+String(v??'');
-if(!data||!data.length)return;grid.innerHTML=(data||[]).map(p=>{const cat=p.es_oferta?'Ofertas '+(p.categoria||''):p.categoria||'General';const photo=p.foto_url?'<img src="'+esc(p.foto_url)+'" alt="'+esc(p.nombre)+'" style="max-width:100%;height:120px;object-fit:contain">':(p.comercio==='Carnicería'?'🥩':p.comercio==='Verdulería'?'🥬':'📦');return '<article class="card" data-cat="'+esc(cat)+'" data-name="'+esc(p.nombre.toLowerCase())+'">'+(p.es_oferta?'<span class="ribbon">OFERTA</span>':'')+'<div class="pic">'+photo+'</div><div class="info"><div class="tag">'+esc(cat)+'</div><h4>'+esc(p.nombre)+'</h4><div class="price">'+esc(money(p.precio))+'</div>'+(p.precio_anterior?'<small class="old">'+esc(money(p.precio_anterior))+'</small>':'')+'<div class="unit">'+esc(p.unidad||p.descripcion||'')+'</div>'+(p.disponible?'<button class="wa" type="button" onclick="contact(\''+esc(p.nombre).replace(/'/g,"\\'")+'\')">'+(p.es_oferta?'Aprovechar oferta':'Consultar por WhatsApp')+'</button>':'<div class="unit"><b>Sin stock</b></div>')+'</div></article>'}).join('');
-const empty=document.getElementById('empty');if(empty)empty.style.display=(data||[]).length?'none':'block';
-}catch(e){console.warn('No se pudo cargar el catálogo compartido:',e)}})();
+(async function(){
+try{
+ const sb=window.supabase.createClient('https://bvowhugolrhjhusdvuzp.supabase.co','sb_publishable_rmuZurklxRlhCxfMPyrleA_udWU84bT');
+ const [productsResult,offersResult]=await Promise.all([
+  sb.from('productos').select('*').eq('comercio','Carnicería').eq('activo',true).order('orden').order('created_at',{ascending:false}),
+  sb.from('ofertas').select('*').eq('comercio','Carnicería').eq('activa',true).order('created_at',{ascending:false})
+ ]);
+ if(productsResult.error)throw productsResult.error;
+ if(offersResult.error)throw offersResult.error;
+ const products=productsResult.data||[],today=new Date().toLocaleDateString('en-CA');
+ const offers=(offersResult.data||[]).filter(o=>(!o.fecha_inicio||o.fecha_inicio<=today)&&(!o.fecha_fin||o.fecha_fin>=today));
+ const grid=document.getElementById('grid');if(!grid)return;
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const money=v=>String(v??'').trim().startsWith('$')?String(v):'$'+String(v??'');
+ const productHtml=products.map(p=>{const cat=p.es_oferta?'Ofertas '+(p.categoria||''):p.categoria||'General';const photo=p.foto_url?'<img src="'+esc(p.foto_url)+'" alt="'+esc(p.nombre)+'" style="max-width:100%;height:120px;object-fit:contain">':'🥩';return '<article class="card" data-cat="'+esc(cat)+'" data-name="'+esc(p.nombre.toLowerCase())+'">'+(p.es_oferta?'<span class="ribbon">OFERTA</span>':'')+'<div class="pic">'+photo+'</div><div class="info"><div class="tag">'+esc(cat)+'</div><h4>'+esc(p.nombre)+'</h4><div class="price">'+esc(money(p.precio))+'</div>'+(p.precio_anterior?'<small class="old">'+esc(money(p.precio_anterior))+'</small>':'')+'<div class="unit">'+esc(p.unidad||p.descripcion||'')+'</div>'+(p.disponible?'<button class="wa" type="button" onclick="contact(\''+esc(p.nombre).replace(/'/g,"\\'")+'\')">'+(p.es_oferta?'Aprovechar oferta':'Consultar por WhatsApp')+'</button>':'<div class="unit"><b>Sin stock</b></div>')+'</div></article>'}).join('');
+ const offerHtml=offers.map(o=>'<article class="card" data-cat="Ofertas" data-name="'+esc(o.titulo.toLowerCase())+'"><span class="ribbon">OFERTA</span><div class="pic">'+(o.foto_url?'<img src="'+esc(o.foto_url)+'" alt="'+esc(o.titulo)+'" style="max-width:100%;height:120px;object-fit:contain">':'🏷️')+'</div><div class="info"><div class="tag">Oferta especial</div><h4>'+esc(o.titulo)+'</h4><div class="price">'+esc(money(o.precio))+'</div><div class="unit">'+esc(o.descripcion||'')+'</div>'+(o.fecha_fin?'<div class="unit">Válida hasta '+esc(o.fecha_fin)+'</div>':'')+'<button class="wa" type="button" onclick="contact(\''+esc(o.titulo).replace(/'/g,"\\'")+'\')">Aprovechar oferta</button></div></article>').join('');
+ if(products.length||offers.length){
+  if(products.length)grid.innerHTML=productHtml;
+  grid.insertAdjacentHTML('beforeend',offerHtml);
+  if(products.length){const filters=document.querySelector('.filters');const existing=[...filters.querySelectorAll('button')].map(b=>b.textContent.trim());const cats=[...new Set(products.map(p=>p.categoria||'General'))];cats.forEach(cat=>{if(!existing.some(x=>x.includes(cat))){const b=document.createElement('button');b.type='button';b.textContent=cat;b.onclick=function(){setCat('meat',cat,b)};filters.appendChild(b)}})}
+  if(typeof filterProducts==='function')filterProducts();
+  const empty=document.getElementById('empty');if(empty)empty.style.display='none';
+ }
+}catch(e){console.warn('No se pudo cargar el catálogo compartido:',e)}
+})();
 </script></body></html>)?String(v):'
 if(!data||!data.length)return;grid.innerHTML=(data||[]).map(p=>{const cat=p.es_oferta?'Ofertas '+(p.categoria||''):p.categoria||'General';const photo=p.foto_url?'<img src="'+esc(p.foto_url)+'" alt="'+esc(p.nombre)+'" style="max-width:100%;height:120px;object-fit:contain">':(p.comercio==='Carnicería'?'🥩':p.comercio==='Verdulería'?'🥬':'📦');return '<article class="card" data-cat="'+esc(cat)+'" data-name="'+esc(p.nombre.toLowerCase())+'">'+(p.es_oferta?'<span class="ribbon">OFERTA</span>':'')+'<div class="pic">'+photo+'</div><div class="info"><div class="tag">'+esc(cat)+'</div><h4>'+esc(p.nombre)+'</h4><div class="price">'+esc(money(p.precio))+'</div>'+(p.precio_anterior?'<small class="old">'+esc(money(p.precio_anterior))+'</small>':'')+'<div class="unit">'+esc(p.unidad||p.descripcion||'')+'</div>'+(p.disponible?'<button class="wa" type="button" onclick="contact(\''+esc(p.nombre).replace(/'/g,"\\'")+'\')">'+(p.es_oferta?'Aprovechar oferta':'Consultar por WhatsApp')+'</button>':'<div class="unit"><b>Sin stock</b></div>')+'</div></article>'}).join('');
 const empty=document.getElementById('empty');if(empty)empty.style.display=(data||[]).length?'none':'block';
