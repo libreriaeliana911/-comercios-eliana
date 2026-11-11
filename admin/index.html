@@ -25,7 +25,7 @@ const SUPABASE_KEY='sb_publishable_rmuZurklxRlhCxfMPyrleA_udWU84bT';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let data={products:[],offers:[],clients:[],reviews:[]},current='inicio',filter='Todos';
 const app=document.getElementById('app'),modal=document.getElementById('modal'),form=document.getElementById('productForm'),offerModalEl=document.getElementById('offerModal'),offerForm=document.getElementById('offerForm');
-app.addEventListener('click',e=>{const button=e.target.closest('[data-edit]');if(button&&app.contains(button)){e.preventDefault();openProduct(button.dataset.edit)}});
+document.addEventListener('click',e=>{const button=e.target.closest('button[data-edit]');if(!button)return;e.preventDefault();e.stopPropagation();const product=data.products.find(p=>String(p.id)===String(button.getAttribute('data-edit')));if(!product){alert('No pude encontrar ese producto en la lista. Actualizá el panel e intentá nuevamente.');return}openProduct(product.id)},true);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function money(v){return String(v??'').trim().startsWith('$')?String(v):'$'+String(v??'')}
 function msg(e){alert(e?.message||'Ocurrió un error. Revisá tu conexión e intentá nuevamente.')}
