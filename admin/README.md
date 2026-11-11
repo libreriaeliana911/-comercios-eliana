@@ -16,3 +16,16 @@ Este panel vive en la rama `admin-eliana`. La página pública en `main` no fue 
    `insert into public.admin_eliana_users (user_id) values ('UUID-DEL-USUARIO');`
 
 Hasta completar estos pasos, no cargar datos reales ni considerar activo el panel conectado. La clave pública existente del sitio no permite crear tablas ni conceder permisos administrativos.
+
+
+## Importar el catálogo actual
+
+Antes de publicar los cambios, abrí Supabase SQL Editor y ejecutá una sola vez el archivo `admin/importar-catalogo-actual.sql`. Importa los productos que ya aparecen en los tres catálogos actuales, solo si ese comercio todavía no tiene productos en la tabla. No toca la tabla de opiniones.
+
+## Estado de conexión
+
+- El panel `admin/index.html` usa Supabase Auth para iniciar sesión y la tabla `productos`/ `ofertas` para administrar registros.
+- Los tres catálogos públicos consultan los productos activos de Supabase; si una consulta no devuelve productos, conservan el catálogo HTML actual.
+- La sección Clientes y la sección Opiniones todavía son informativas y no están conectadas al registro real.
+- La carga de imágenes desde archivo/cámara y el almacenamiento de fotos todavía no están configurados; por ahora el campo admite URL de imagen.
+- Los cambios están en la rama `admin-eliana`; no se publican hasta integrar esa rama en `main` y completar el despliegue de GitHub Pages.
