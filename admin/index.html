@@ -51,35 +51,47 @@ app.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=async()=>{const o=dat
 app.querySelectorAll('[data-offerdelete]').forEach(b=>b.onclick=async()=>{if(confirm('¿Eliminar esta oferta?')){const {error}=await sb.from('ofertas').delete().eq('id',b.dataset.offerdelete);if(error)msg(error);else await loadData()}});
 }
 async function manageCategories(){
-const store=document.getElementById('storeFilter').value;
-const rows=data.products.filter(p=>store==='Todos'||p.comercio===store);
-const cats=[...new Set(rows.map(p=>p.categoria||'General'))].sort();
-if(!cats.length){alert('Todavía no hay categorías para administrar.');return}
-const choice=prompt('Categorías disponibles:\n'+cats.join('\n')+'\n\nEscribí exactamente una categoría:');
-if(!choice||!cats.includes(choice)){if(choice)alert('No encontré esa categoría.');return}
-const action=prompt('Escribí RENOMBRAR o ELIMINAR para '+choice+'.');if(!action)return;
-let query=sb.from('productos').update({categoria:action.trim().toUpperCase()==='RENOMBRAR'?prompt('Nuevo nombre:',choice):'General'}).eq('categoria',choice);
-if(store!=='Todos')query=query.eq('comercio',store);
-if(!['RENOMBRAR','ELIMINAR'].includes(action.trim().toUpperCase())){alert('Acción no reconocida.');return}
-const {error}=await query;if(error)msg(error);else await loadData();
+ const store=document.getElementById('storeFilter').value;
+ const rows=data.products.filter(p=>store==='Todos'||p.comercio===store);
+ const cats=[...new Set(rows.map(p=>p.categoria||'General'))].sort();
+ if(!cats.length){alert('Todavía no hay categorías para administrar.');return}
+ const choice=prompt('Categorías disponibles:\n'+cats.join('\n')+'\n\nEscribí exactamente una categoría:');
+ if(!choice)return;
+ if(!cats.includes(choice)){alert('No encontré esa categoría.');return}
+ const action=prompt('Escribí RENOMBRAR o ELIMINAR para '+choice+'.');
+ if(!action)return;
+ const mode=action.trim().toUpperCase();
+ if(!['RENOMBRAR','ELIMINAR'].includes(mode)){alert('Acción no reconocida.');return}
+ let category='General';
+ if(mode==='RENOMBRAR'){category=prompt('Nuevo nombre para la categoría:',choice)?.trim();if(!category)return}
+ if(mode==='ELIMINAR'&&!confirm('Los productos pasarán a la categoría General. ¿Continuar?'))return;
+ let query=sb.from('productos').update({categoria}).eq('categoria',choice);
+ if(store!=='Todos')query=query.eq('comercio',store);
+ const {error}=await query;if(error)msg(error);else await loadData();
 }
 async function editOffer(id){
-const old=id?data.offers.find(o=>o.id===id):null;
-const titulo=prompt('Nombre de la oferta:',old?.titulo||'');if(!titulo?.trim())return;
-const precio=prompt('Precio o promoción:',old?.precio||'');if(precio===null)return;
-const comercio=prompt('Comercio: Verdulería, Carnicería o Librería y Juguetería',old?.comercio||'Verdulería');if(!comercio)return;
-const descripcion=prompt('Descripción (opcional):',old?.descripcion||'')||'';
-const foto_url=prompt('URL de foto (opcional):',old?.foto_url||'')||'';
-const fecha_inicio=prompt('Fecha de inicio AAAA-MM-DD (opcional):',old?.fecha_inicio||'')||null;
-const fecha_fin=prompt('Fecha de vencimiento AAAA-MM-DD (opcional):',old?.fecha_fin||'')||null;
-const payload={titulo:titulo.trim(),precio:precio.trim(),comercio:comercio.trim(),descripcion:descripcion.trim(),foto_url:foto_url.trim(),fecha_inicio,fecha_fin};
-const result=old?await sb.from('ofertas').update(payload).eq('id',id):await sb.from('ofertas').insert({...payload,activa:true});
-if(result.error)msg(result.error);else await loadData();
+ const old=id?data.offers.find(o=>o.id===id):null;
+ const titulo=prompt('Nombre de la oferta:',old?.titulo||'');if(!titulo?.trim())return;
+ const precio=prompt('Precio o promoción:',old?.precio||'');if(precio===null)return;
+ const comercio=prompt('Comercio: Verdulería, Carnicería o Librería y Juguetería',old?.comercio||'Verdulería');if(!comercio)return;
+ const validStores=['Verdulería','Carnicería','Librería y Juguetería'];
+ if(!validStores.includes(comercio.trim())){alert('Elegí uno de los tres comercios tal como aparece en la lista.');return}
+ const descripcion=prompt('Descripción (opcional):',old?.descripcion||'')||'';
+ const foto_url=prompt('URL de foto (opcional):',old?.foto_url||'')||'';
+ const fecha_inicio=prompt('Fecha de inicio AAAA-MM-DD (opcional):',old?.fecha_inicio||'')||null;
+ const fecha_fin=prompt('Fecha de vencimiento AAAA-MM-DD (opcional):',old?.fecha_fin||'')||null;
+ const validDate=x=>!x||/^\\d{4}-\\d{2}-\\d{2}$/.test(x);
+ if(!validDate(fecha_inicio)||!validDate(fecha_fin)){alert('Usá el formato AAAA-MM-DD para las fechas.');return}
+ if(fecha_inicio&&fecha_fin&&fecha_fin<fecha_inicio){alert('La fecha de vencimiento no puede ser anterior al inicio.');return}
+ const payload={titulo:titulo.trim(),precio:precio.trim(),comercio:comercio.trim(),descripcion:descripcion.trim(),foto_url:foto_url.trim(),fecha_inicio,fecha_fin};
+ const result=old?await sb.from('ofertas').update(payload).eq('id',id):await sb.from('ofertas').insert({...payload,activa:true});
+ if(result.error)msg(result.error);else await loadData();
 }
 async function editClient(id){const old=id?data.clients.find(c=>c.id===id):null;const nombre=prompt('Nombre del cliente:',old?.nombre||'');if(!nombre?.trim())return;const telefono=prompt('Teléfono:',old?.telefono||'')||'';const comercio=prompt('Comercio de interés (Verdulería, Carnicería o Librería y Juguetería):',old?.comercio||'')||'';const notas=prompt('Notas o consultas:',old?.notas||'')||'';const payload={nombre:nombre.trim(),telefono:telefono.trim(),comercio:comercio.trim(),notas:notas.trim()};const result=old?await sb.from('clientes').update(payload).eq('id',id):await sb.from('clientes').insert(payload);if(result.error)msg(result.error);else await loadData()}
 function openProduct(id){form.reset();document.getElementById('productId').value='';document.getElementById('modalTitle').textContent='Agregar producto';if(id){const p=data.products.find(x=>x.id===id);document.getElementById('productId').value=p.id;document.getElementById('pStore').value=p.comercio;document.getElementById('pName').value=p.nombre;document.getElementById('pCategory').value=p.categoria||'';document.getElementById('pPrice').value=p.precio;document.getElementById('pOldPrice').value=p.precio_anterior||'';document.getElementById('pIsOffer').checked=!!p.es_oferta;document.getElementById('pUnit').value=p.unidad||'';document.getElementById('pDescription').value=p.descripcion||'';document.getElementById('pPhotoUrl').value=p.foto_url||'';document.getElementById('modalTitle').textContent='Editar producto'}modal.classList.add('open')}
 document.getElementById('cancel').onclick=()=>modal.classList.remove('open');
 form.addEventListener('submit',async e=>{e.preventDefault();const id=document.getElementById('productId').value;let photoUrl=document.getElementById('pPhotoUrl').value.trim();const photoFile=document.getElementById('pPhotoFile').files[0];if(photoFile){if(!photoFile.type.startsWith('image/')){alert('Elegí un archivo de imagen.');return}if(photoFile.size>6*1024*1024){alert('La imagen debe pesar menos de 6 MB.');return}const ext=(photoFile.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';const path='productos/'+crypto.randomUUID()+'.'+ext;const {error:uploadError}=await sb.storage.from('admin-eliana-fotos').upload(path,photoFile,{upsert:false,contentType:photoFile.type});if(uploadError){msg(uploadError);return}photoUrl=sb.storage.from('admin-eliana-fotos').getPublicUrl(path).data.publicUrl}const payload={comercio:document.getElementById('pStore').value,nombre:document.getElementById('pName').value.trim(),categoria:document.getElementById('pCategory').value.trim()||'General',precio:document.getElementById('pPrice').value.trim(),precio_anterior:document.getElementById('pOldPrice').value.trim(),es_oferta:document.getElementById('pIsOffer').checked,unidad:document.getElementById('pUnit').value.trim(),descripcion:document.getElementById('pDescription').value.trim(),foto_url:photoUrl,activo:true};const result=id?await sb.from('productos').update(payload).eq('id',id):await sb.from('productos').insert(payload);if(result.error){msg(result.error);return}modal.classList.remove('open');await loadData()});
 const signout=document.createElement('button');signout.className='tab';signout.textContent='Cerrar sesión';signout.onclick=async()=>{await sb.auth.signOut();location.reload()};document.querySelector('.tabs').append(signout);
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(e=>console.warn('No se pudo instalar el modo app:',e)))}
 boot();
 </script></body></html>
