@@ -26,6 +26,8 @@ Antes de publicar los cambios, abrí Supabase SQL Editor y ejecutá una sola vez
 
 - El panel `admin/index.html` usa Supabase Auth para iniciar sesión y la tabla `productos`/ `ofertas` para administrar registros.
 - Los tres catálogos públicos consultan los productos activos de Supabase; si una consulta no devuelve productos, conservan el catálogo HTML actual.
-- La sección Clientes y la sección Opiniones todavía son informativas y no están conectadas al registro real.
-- La carga de imágenes desde archivo/cámara y el almacenamiento de fotos todavía no están configurados; por ahora el campo admite URL de imagen.
+- Clientes: alta, edición, búsqueda, eliminación y exportación CSV de fichas cargadas desde el panel. No se importan contactos de WhatsApp ni se inventan clientes.
+- Opiniones: lectura de hasta 100 opiniones recientes de la tabla existente, con estrellas y comentarios. No se atribuyen opiniones a fichas de clientes automáticamente.
+- Fotos: carga desde galería/cámara al bucket público `admin-eliana-fotos` (máximo 6 MB; JPEG, PNG, WebP o GIF), además de URL manual.
+- Estas tres funciones requieren ejecutar una vez `admin/completar-clientes-fotos-opiniones.sql` en Supabase SQL Editor.
 - Los cambios están en la rama `admin-eliana`; no se publican hasta integrar esa rama en `main` y completar el despliegue de GitHub Pages.
