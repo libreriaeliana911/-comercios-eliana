@@ -25,7 +25,17 @@ const SUPABASE_KEY='sb_publishable_rmuZurklxRlhCxfMPyrleA_udWU84bT';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let data={products:[],offers:[],clients:[],reviews:[]},current='inicio',filter='Todos';
 const app=document.getElementById('app'),modal=document.getElementById('modal'),form=document.getElementById('productForm'),offerModalEl=document.getElementById('offerModal'),offerForm=document.getElementById('offerForm');
-document.addEventListener('click',e=>{const button=e.target.closest('button[data-edit]');if(!button)return;e.preventDefault();e.stopPropagation();const product=data.products.find(p=>String(p.id)===String(button.getAttribute('data-edit')));if(!product){alert('No pude encontrar ese producto en la lista. Actualizá el panel e intentá nuevamente.');return}openProduct(product.id)},true);
+document.addEventListener('click',async e=>{
+ const button=e.target.closest('button[data-edit],button[data-stock],button[data-delete]');
+ if(!button)return;
+ e.preventDefault();e.stopImmediatePropagation();
+ const id=button.getAttribute('data-edit')||button.getAttribute('data-stock')||button.getAttribute('data-delete');
+ try{
+  if(button.hasAttribute('data-edit')){const p=data.products.find(x=>String(x.id)===String(id));if(!p){alert('No pude encontrar ese producto. Actualizá la lista.');return}openProduct(p.id);return}
+  if(button.hasAttribute('data-stock')){const p=data.products.find(x=>String(x.id)===String(id));if(!p){alert('No pude encontrar ese producto.');return}button.disabled=true;const {error}=await sb.from('productos').update({disponible:!p.disponible}).eq('id',p.id);if(error){msg(error);return}await loadData();return}
+  if(button.hasAttribute('data-delete')){if(!confirm('¿Eliminar este producto? Esta acción no se puede deshacer.'))return;button.disabled=true;const {error}=await sb.from('productos').delete().eq('id',id);if(error){msg(error);return}await loadData();alert('Producto eliminado.')}
+ }catch(err){msg(err)}finally{button.disabled=false}
+},true);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function money(v){return String(v??'').trim().startsWith('$')?String(v):'$'+String(v??'')}
 function msg(e){alert(e?.message||'Ocurrió un error. Revisá tu conexión e intentá nuevamente.')}
@@ -46,8 +56,6 @@ document.getElementById('addOffer').onclick=()=>editOffer();app.querySelectorAll
 }else if(current==='opiniones'){const counts=[1,2,3,4,5].map(n=>({n,count:data.reviews.filter(r=>Number(r.estrellas)===n).length}));const avg=data.reviews.length?(data.reviews.reduce((s,r)=>s+Number(r.estrellas||0),0)/data.reviews.length).toFixed(1):'—';app.innerHTML='<div class="pagehead"><div><h2>Opiniones de clientes</h2><p class="muted">Hasta 100 opiniones recientes. No se vinculan a fichas de clientes automáticamente.</p></div><span class="pill">'+data.reviews.length+' opiniones</span></div><div class="card"><div class="row"><h3>Promedio general</h3><strong class="stars">'+avg+' ★</strong></div><div class="muted">'+counts.map(x=>x.n+' ★: '+x.count).join('　·　')+'</div></div><div class="cards" style="margin-top:12px">'+(data.reviews.map(r=>'<article class="review-card"><div class="stars">'+('★'.repeat(Math.max(0,Math.min(5,Number(r.estrellas)||0))))+('☆'.repeat(5-Math.max(0,Math.min(5,Number(r.estrellas)||0))))+'</div><h3>'+esc(r.nombre||'Cliente')+'</h3><p class="muted">'+esc(r.local||'Comercio no indicado')+' · '+(r.created_at?new Date(r.created_at).toLocaleString('es-AR'):'Fecha no disponible')+'</p><p>'+esc(r.comentario||'Sin comentario')+'</p></article>').join('')||'<div class="empty">Todavía no hay opiniones registradas.</div>')+'</div>'}
 app.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
 
-app.querySelectorAll('[data-stock]').forEach(b=>b.onclick=async()=>{const p=data.products.find(x=>x.id===b.dataset.stock);const {error}=await sb.from('productos').update({disponible:!p.disponible}).eq('id',p.id);if(error)msg(error);else await loadData()});
-app.querySelectorAll('[data-delete]').forEach(b=>b.onclick=async()=>{if(confirm('¿Eliminar este producto?')){const {error}=await sb.from('productos').delete().eq('id',b.dataset.delete);if(error)msg(error);else await loadData()}});
 app.querySelectorAll('[data-toggle]').forEach(b=>b.onclick=async()=>{const o=data.offers.find(x=>x.id===b.dataset.toggle);const {error}=await sb.from('ofertas').update({activa:!o.activa}).eq('id',o.id);if(error)msg(error);else await loadData()});
 app.querySelectorAll('[data-offerdelete]').forEach(b=>b.onclick=async()=>{if(confirm('¿Eliminar esta oferta?')){const {error}=await sb.from('ofertas').delete().eq('id',b.dataset.offerdelete);if(error)msg(error);else await loadData()}});
 }
